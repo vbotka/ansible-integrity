@@ -1,0 +1,38 @@
+---
+# default vars for ansible-integrity
+
+# source
+integrity_source_dest: "/usr/local/src"
+integrity_source_url: "https://github.com/vbotka/integrity/archive"
+integrity_source-version: "0.1.0"
+integrity_source_file: "0.1.0.tar.gz"
+integrity_source_dir: "integrity-0.1.0"
+#
+# directories
+integrity_bin_dir: "/root/bin"
+integrity_linkdir: "/var/db/integrity/link"
+integrity_metadir: "/var/db/integrity/meta"
+integrity_dir_owner: "root"
+integrity_dir_group: "wheel"
+integrity_dir_mode: "700"
+#
+# cron
+integrity_cron_user: "root"
+integrity_cron_mailto: "root"
+integrity_cron_hour: "*/4"
+integrity_cron_minute: "20"
+#
+# clients
+integrity_clients:
+  - { dir: "/root/bin", link: "root-bin" }
+#  - { dir: "/etc", link: "etc" }
+#  - { dir: "/usr/local/etc", link: "usr-local-etc" }
+#  - { dir: "/bin", link: "bin" }
+#  - { dir: "/usr/bin", link: "usr-bin" }
+#  - { dir: "/usr/local/bin", link: "usr-local-bin" }
+#  - { dir: "/sbin", link: "sbin" }
+#  - { dir: "/usr/sbin", link: "usr-sbin" }
+#  - { dir: "/usr/local/sbin", link: "usr-local-sbin" }
+#  - { dir: "/usr/local/etc/letsencrypt/archive", link: "letsencrypt" }
+#  
+# EOF

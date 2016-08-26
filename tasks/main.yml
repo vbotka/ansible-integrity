@@ -1,0 +1,16 @@
+---
+
+- include: packages.yml
+  tags: [packages, integrity_all]
+
+- include: source.yml
+  tags: [source, integrity_all]
+
+- include: copy.yml
+  tags: [copy, integrity_all]
+
+- include: configure.yml
+  tags: [configure, integrity_all]
+
+- include: cron.yml
+  tags: [cron, integrity_all]
