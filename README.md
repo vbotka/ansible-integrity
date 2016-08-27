@@ -1,4 +1,4 @@
-integrity
+integrity ![Build Status](https://travis-ci.org/vbotka/ansible-integrity.svg?branch=master)
 =========
 
 Install integrity from github.com/vbotka/integrity, record metadata
