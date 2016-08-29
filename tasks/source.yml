@@ -16,3 +16,4 @@
   file: src="{{ integrity_source_dest }}/{{ integrity_source_dir }}"
         dest="{{ integrity_source_dest }}/integrity"
         state="link"
+        force="yes"
