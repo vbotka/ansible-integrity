@@ -1,0 +1,4 @@
+---
+
+- name: Copy exclude.default to {{ integrity_metadir }}
+  copy: src="{{ role_path }}/files/exclude.default" dest="{{ integrity_metadir }}/exclude.default" owner=root group=wheel mode=644
