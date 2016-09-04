@@ -2,4 +2,4 @@
 # handlers for ansible-integrity
 
 - name: Create missing meta data
-  command: /root/bin/integrity -i -a
+  command: /root/bin/integrity -s -i -a
