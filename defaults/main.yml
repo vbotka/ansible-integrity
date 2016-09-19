@@ -1,12 +1,21 @@
 ---
 # default vars for ansible-integrity
 
+freebsd_install_method: "packages"
+#freebsd_install_method: "ports"
+#freebsd_use_packages: "yes"
+integrity_packages:
+  - bash
+  - git
+  - gtar
+  - md5deep
+
 # source
 integrity_source_dest: "/usr/local/src"
 integrity_source_url: "https://github.com/vbotka/integrity/archive"
-integrity_source-version: "0.2.4"
-integrity_source_file: "0.2.4.tar.gz"
-integrity_source_dir: "integrity-0.2.4"
+integrity_source-version: "0.2.5"
+integrity_source_file: "0.2.5.tar.gz"
+integrity_source_dir: "integrity-0.2.5"
 #
 # directories
 integrity_bin_dir: "/root/bin"
