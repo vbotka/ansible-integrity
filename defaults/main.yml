@@ -13,9 +13,9 @@ integrity_packages:
 # source
 integrity_source_dest: "/usr/local/src"
 integrity_source_url: "https://github.com/vbotka/integrity/archive"
-integrity_source-version: "0.2.5"
-integrity_source_file: "0.2.5.tar.gz"
-integrity_source_dir: "integrity-0.2.5"
+integrity_source-version: "0.2.6"
+integrity_source_file: "0.2.6.tar.gz"
+integrity_source_dir: "integrity-0.2.6"
 #
 # directories
 integrity_bin_dir: "/root/bin"
