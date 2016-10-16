@@ -3,10 +3,7 @@ integrity
 
 [![Build Status](https://travis-ci.org/vbotka/ansible-integrity.svg?branch=master)](https://travis-ci.org/vbotka/ansible-integrity)
 
-Ansible role. Install *integrity* from github.com/vbotka/integrity, record metadata
-(hash/mtree) of specified direcories and configure cron to email alerts about inconsistencies.
-
-https://galaxy.ansible.com/vbotka/ansible-integrity/
+[Ansible role](https://galaxy.ansible.com/vbotka/ansible-integrity/). Install *integrity* from [github.com/vbotka/integrity](https://github.com/vbotka/integrity), record metadata (hash/mtree) of specified direcories and configure cron to email alerts about inconsistencies.
 
 Requirements.
 ------------
