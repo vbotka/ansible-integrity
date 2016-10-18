@@ -11,11 +11,11 @@ integrity_packages:
   - md5deep
 
 # source
+integrity_source_version: "0.2.6"
+integrity_source_file: "{{integrity_source_version}}.tar.gz"
+integrity_source_dir: "integrity-{{integrity_source_version}}"
 integrity_source_dest: "/usr/local/src"
 integrity_source_url: "https://github.com/vbotka/integrity/archive"
-integrity_source-version: "0.2.6"
-integrity_source_file: "0.2.6.tar.gz"
-integrity_source_dir: "integrity-0.2.6"
 #
 # directories
 integrity_bin_dir: "/root/bin"
