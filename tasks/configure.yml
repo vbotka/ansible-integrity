@@ -24,5 +24,6 @@
   file: src="{{ item.dir }}"
         dest="{{ integrity_linkdir }}/{{ item.link }}"
         state="link"
+        force="yes"
   with_items: "{{ integrity_clients }}"
   notify: Create missing meta data
