@@ -1,29 +1,40 @@
 ---
 
 - name: Create directory for clients {{ integrity_linkdir }}
-  file: state="directory"
-        path="{{ integrity_linkdir }}"
-        owner="{{ integrity_dir_owner }}"
-        group="{{ integrity_dir_group }}"
-        mode="{{ integrity_dir_mode }}"
+  file: >
+    state="directory"
+    path="{{ integrity_linkdir }}"
+    owner="{{ integrity_dir_owner }}"
+    group="{{ integrity_dir_group }}"
+    mode="{{ integrity_dir_mode }}"
 
 - name: Create directory for data {{ integrity_metadir }}
-  file: state="directory"
-        path="{{ integrity_metadir }}"
-        owner="{{ integrity_dir_owner }}"
-        group="{{ integrity_dir_group }}"
-        mode="{{ integrity_dir_mode }}"
+  file: >
+    state="directory"
+    path="{{ integrity_metadir }}"
+    owner="{{ integrity_dir_owner }}"
+    group="{{ integrity_dir_group }}"
+    mode="{{ integrity_dir_mode }}"
 
 - name: Configure /etc/integrity
-  lineinfile: dest="/etc/integrity" regexp="{{ item.regexp }}" line="{{ item.line }}" backup="yes" create="yes"
+  lineinfile: >
+    dest="/etc/integrity"
+    regexp="{{ item.regexp }}"
+    line="{{ item.line }}"
+    backup="yes"
+    create="yes"
   with_items:
     - { regexp: "^LINKDIR", line: "LINKDIR=\"{{ integrity_linkdir }}\""}
     - { regexp: "^METADIR", line: "METADIR=\"{{ integrity_metadir }}\""}
 
 - name: Create symbolic links to clients
-  file: src="{{ item.dir }}"
-        dest="{{ integrity_linkdir }}/{{ item.link }}"
-        state="link"
-        force="yes"
+  file: >
+    src="{{ item.dir }}"
+    dest="{{ integrity_linkdir }}/{{ item.link }}"
+    state="link"
+    force="yes"
   with_items: "{{ integrity_clients }}"
   notify: Create missing meta data
+
+# EOF
+...

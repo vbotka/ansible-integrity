@@ -16,3 +16,6 @@
   with_items: "{{integrity_packages}}"
   when: freebsd_install_method == "ports"
   tags: ports
+
+# EOF
+...

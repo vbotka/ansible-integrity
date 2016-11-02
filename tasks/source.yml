@@ -1,19 +1,27 @@
 ---
 
 - name: Create directory for the source code {{ integrity_source_dest }}
-  file: state="directory" path="{{ integrity_source_dest }}"
+  file: >
+    state="directory"
+    path="{{ integrity_source_dest }}"
 
 - name: Download sources from {{ integrity_source_url }}/{{ integrity_source_file }}
-  get_url: url="{{ integrity_source_url }}/{{ integrity_source_file }}"
-           dest="{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
+  get_url: >
+    url="{{ integrity_source_url }}/{{ integrity_source_file }}"
+    dest="{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
 
 - name: Extract sources to {{ integrity_source_dest }}
-  unarchive: src="{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
-             dest="{{ integrity_source_dest }}"
-             copy="no"
+  unarchive: >
+    src="{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
+    dest="{{ integrity_source_dest }}"
+    copy="no"
 
 - name: Create symbolic link integrity to {{ integrity_source_dir }}
-  file: src="{{ integrity_source_dest }}/{{ integrity_source_dir }}"
-        dest="{{ integrity_source_dest }}/integrity"
-        state="link"
-        force="yes"
+  file: >
+    src="{{ integrity_source_dest }}/{{ integrity_source_dir }}"
+    dest="{{ integrity_source_dest }}/integrity"
+    state="link"
+    force="yes"
+
+# EOF
+...

@@ -1,4 +1,13 @@
 ---
 
 - name: Copy exclude.default to {{ integrity_metadir }}
-  copy: src="{{ role_path }}/files/exclude.default" dest="{{ integrity_metadir }}/exclude.default" owner=root group=wheel mode=644
+  copy: >
+    src="{{role_path}}/files/exclude.default"
+    dest="{{integrity_metadir}}/exclude.default"
+    owner="root"
+    group="wheel"
+    mode="0644"
+  tags: bsd_integrity_copy_exclude
+
+# EOF
+...
