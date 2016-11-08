@@ -1,19 +1,40 @@
 ---
 
+- name: Add {{ansible_os_family}} specific variables
+  include_vars: "{{ansible_os_family}}.yml"
+  tags:
+    - integrity_variables
+    - integrity_all
+
 - include: packages.yml
-  tags: [packages, integrity_all]
+  tags:
+    - integrity_packages
+    - integrity_all
 
 - include: source.yml
-  tags: [source, integrity_all]
+  tags:
+    - integrity_source
+    - integrity_all
 
 - include: copy.yml
-  tags: [copy, integrity_all]
+  tags:
+    - integrity_copy
+    - integrity_all
 
 - include: configure.yml
-  tags: [configure, integrity_all]
+  tags:
+    - integrity_configure
+    - integrity_all
 
 - include: copy_exclude_file.yml
-  tags: [copy_exclude_file, integrity_all]
+  tags:
+    - integrity_copy_exclude_file
+    - integrity_all
 
 - include: cron.yml
-  tags: [cron, integrity_all]
+  tags:
+    - integrity_cron
+    - integrity_all
+
+# EOF
+...

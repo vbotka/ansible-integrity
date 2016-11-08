@@ -8,10 +8,14 @@ galaxy_info:
   platforms:
     - name: FreeBSD
       versions:
-        - all
+        - 10.3
+    - name: Ubuntu
+      versions:
+        - xenial
+    - name: Debian
+    - name: Fedora
+    - name: EL
   galaxy_tags:
-    - installer
     - security
     - ids
-    - cron
 dependencies: []

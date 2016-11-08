@@ -1,0 +1,21 @@
+---
+# FreeBSD vars for ansible-integrity
+
+freebsd_install_method: "packages"
+#freebsd_install_method: "ports"
+#freebsd_use_packages: "yes"
+
+integrity_packages:
+  - bash
+  - git
+  - gtar
+  - md5deep
+
+integrity_owner: "root"
+integrity_group: "wheel"
+integrity_conf_HASHDEEP: "/usr/local/bin/md5deep"
+integrity_conf_HASHDEEPCONF: "-o f -l -x"
+integrity_conf_MTREE: "/usr/sbin/mtree"
+
+# EOF
+...

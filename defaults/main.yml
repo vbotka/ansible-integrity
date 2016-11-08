@@ -1,36 +1,28 @@
 ---
 # default vars for ansible-integrity
 
-freebsd_install_method: "packages"
-#freebsd_install_method: "ports"
-#freebsd_use_packages: "yes"
-integrity_packages:
-  - bash
-  - git
-  - gtar
-  - md5deep
-
 # source
 integrity_source_version: "0.2.6"
 integrity_source_file: "{{integrity_source_version}}.tar.gz"
 integrity_source_dir: "integrity-{{integrity_source_version}}"
 integrity_source_dest: "/usr/local/src"
 integrity_source_url: "https://github.com/vbotka/integrity/archive"
-#
+
 # directories
 integrity_bin_dir: "/root/bin"
 integrity_linkdir: "/var/db/integrity/link"
 integrity_metadir: "/var/db/integrity/meta"
-integrity_dir_owner: "root"
-integrity_dir_group: "wheel"
-integrity_dir_mode: "700"
-#
+integrity_owner: "root"
+integrity_group: "wheel"
+integrity_dir_mode: "0755"
+integrity_bin_mode: "0755"
+
 # cron
 integrity_cron_user: "root"
 integrity_cron_mailto: "root"
 integrity_cron_hour: "*/4"
 integrity_cron_minute: "20"
-#
+
 # clients
 integrity_clients:
   - { dir: "/root/bin", link: "root-bin" }
@@ -43,5 +35,6 @@ integrity_clients:
 #  - { dir: "/usr/sbin", link: "usr-sbin" }
 #  - { dir: "/usr/local/sbin", link: "usr-local-sbin" }
 #  - { dir: "/usr/local/etc/letsencrypt/archive", link: "letsencrypt" }
-#  
+
 # EOF
+...

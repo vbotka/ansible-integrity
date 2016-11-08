@@ -1,18 +1,33 @@
 ---
 
-- name: Create directory for installation {{ integrity_bin_dir }}
+- name: Create directory for installation {{integrity_bin_dir}}
   file: >
     state="directory"
-    path="{{ integrity_bin_dir }}"
+    path="{{integrity_bin_dir}}"
 
-- name: Copy script to {{ integrity_bin_dir }}
+- name: Copy script to {{integrity_bin_dir}}
   copy: >
-    src="{{ integrity_source_dest }}/integrity/integrity"
-    dest="{{ integrity_bin_dir }}/integrity"
+    src="{{integrity_source_dest}}/integrity/integrity"
+    dest="{{integrity_bin_dir}}/integrity"
     remote_src="yes"
-    owner="root"
-    group="wheel"
-    mode="0755"
+    owner="{{integrity_owner}}"
+    group="{{integrity_group}}"
+    mode="{{integrity_bin_mode}}"
+  changed_when: false
 
+- name: Which bash
+  command: "which bash"
+  register: integrity_which_bash
+  changed_when: false
+
+  #- debug: msg="{{integrity_which_bash.stdout}}"
+
+- name: Patch {{integrity_which_bash.stdout}} in {{integrity_bin_dir}}/integrity
+  lineinfile: >
+    dest="{{integrity_bin_dir}}/integrity"
+    regexp="#!"
+    line="#!{{integrity_which_bash.stdout}}"
+  changed_when: false
+    
 # EOF
 ...

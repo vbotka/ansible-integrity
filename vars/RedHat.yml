@@ -1,0 +1,17 @@
+---
+# RedHat vars for ansible-integrity
+
+integrity_packages:
+  - bash
+  - git
+  - hashdeep
+
+integrity_owner: "root"
+integrity_group: "root"
+
+integrity_conf_HASHDEEP: "/usr/bin/hashdeep"
+integrity_conf_HASHDEEPCONF: "-o f -l -x -k"
+integrity_conf_MTREE: "/usr/bin/fmtree"
+
+# EOF
+...

@@ -4,16 +4,16 @@
   file: >
     state="directory"
     path="{{ integrity_linkdir }}"
-    owner="{{ integrity_dir_owner }}"
-    group="{{ integrity_dir_group }}"
+    owner="{{ integrity_owner }}"
+    group="{{ integrity_group }}"
     mode="{{ integrity_dir_mode }}"
 
 - name: Create directory for data {{ integrity_metadir }}
   file: >
     state="directory"
     path="{{ integrity_metadir }}"
-    owner="{{ integrity_dir_owner }}"
-    group="{{ integrity_dir_group }}"
+    owner="{{ integrity_owner }}"
+    group="{{ integrity_group }}"
     mode="{{ integrity_dir_mode }}"
 
 - name: Configure /etc/integrity
@@ -24,8 +24,11 @@
     backup="yes"
     create="yes"
   with_items:
-    - { regexp: "^LINKDIR", line: "LINKDIR=\"{{ integrity_linkdir }}\""}
-    - { regexp: "^METADIR", line: "METADIR=\"{{ integrity_metadir }}\""}
+    - { regexp: "^LINKDIR=", line: "LINKDIR=\"{{ integrity_linkdir }}\""}
+    - { regexp: "^METADIR=", line: "METADIR=\"{{ integrity_metadir }}\""}
+    - { regexp: "^HASHDEEP=", line: "HASHDEEP=\"{{ integrity_conf_HASHDEEP }}\""}
+    - { regexp: "^HASHDEEPCONF=", line: "HASHDEEPCONF=\"{{ integrity_conf_HASHDEEPCONF }}\""}
+    - { regexp: "^MTREE=", line: "MTREE=\"{{ integrity_conf_MTREE }}\""}
 
 - name: Create symbolic links to clients
   file: >

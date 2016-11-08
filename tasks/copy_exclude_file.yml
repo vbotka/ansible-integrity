@@ -4,10 +4,10 @@
   copy: >
     src="{{role_path}}/files/exclude.default"
     dest="{{integrity_metadir}}/exclude.default"
-    owner="root"
-    group="wheel"
+    owner="{{integrity_owner}}"
+    group="{{integrity_group}}"
     mode="0644"
-  tags: bsd_integrity_copy_exclude
+  tags: integrity_copy_exclude
 
 # EOF
 ...
