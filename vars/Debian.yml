@@ -5,6 +5,7 @@ integrity_packages:
   - bash
   - git
   - hashdeep
+  - freebsd-buildutils
 
 integrity_owner: "root"
 integrity_group: "root"
