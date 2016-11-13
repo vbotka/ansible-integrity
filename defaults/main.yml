@@ -7,6 +7,7 @@ integrity_source_file: "{{integrity_source_version}}.tar.gz"
 integrity_source_dir: "integrity-{{integrity_source_version}}"
 integrity_source_dest: "/usr/local/src"
 integrity_source_url: "https://github.com/vbotka/integrity/archive"
+integrity_source_ignore_current_lock: "yes"
 
 # directories
 integrity_bin_dir: "/root/bin"
@@ -14,7 +15,7 @@ integrity_linkdir: "/var/db/integrity/link"
 integrity_metadir: "/var/db/integrity/meta"
 integrity_owner: "root"
 integrity_group: "wheel"
-integrity_dir_mode: "0755"
+integrity_bin_dir_mode: "0755"
 integrity_bin_mode: "0755"
 
 # cron

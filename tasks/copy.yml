@@ -1,19 +1,34 @@
 ---
+- name: Test presence of {{integrity_source_dest}}/integrity-current.lock
+  stat: path="{{integrity_source_dest}}/integrity-current.lock"
+  register: integrity_current_lock
+
+- debug: msg="[LOCK] integrity-current.lock file is present. Scripts will no be copied."
+  when: integrity_current_lock.stat.exists == True and
+        integrity_source_ignore_current_lock == "no"
 
 - name: Create directory for installation {{integrity_bin_dir}}
   file: >
     state="directory"
     path="{{integrity_bin_dir}}"
+    owner="{{integrity_owner}}"
+    group="{{integrity_group}}"
+    mode="{{integrity_bin_dir_mode}}"
+  when: integrity_current_lock.stat.exists == False or
+        integrity_source_ignore_current_lock == "yes"
 
 - name: Copy script to {{integrity_bin_dir}}
   copy: >
-    src="{{integrity_source_dest}}/integrity/integrity"
-    dest="{{integrity_bin_dir}}/integrity"
+    src="{{integrity_source_dest}}/integrity/{{item}}"
+    dest="{{integrity_bin_dir}}/{{item}}"
     remote_src="yes"
     owner="{{integrity_owner}}"
     group="{{integrity_group}}"
     mode="{{integrity_bin_mode}}"
-  changed_when: false
+  with_items:
+    - integrity
+  when: integrity_current_lock.stat.exists == False or
+        integrity_source_ignore_current_lock == "yes"
 
 - name: Which bash
   command: "which bash"
@@ -27,7 +42,6 @@
     dest="{{integrity_bin_dir}}/integrity"
     regexp="#!"
     line="#!{{integrity_which_bash.stdout}}"
-  changed_when: false
     
 # EOF
 ...
