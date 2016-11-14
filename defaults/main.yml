@@ -2,7 +2,7 @@
 # default vars for ansible-integrity
 
 # source
-integrity_source_version: "0.2.6"
+integrity_source_version: "0.2.7"
 integrity_source_file: "{{integrity_source_version}}.tar.gz"
 integrity_source_dir: "integrity-{{integrity_source_version}}"
 integrity_source_dest: "/usr/local/src"
@@ -24,6 +24,7 @@ integrity_cron_user: "root"
 integrity_cron_mailto: "root"
 integrity_cron_hour: "*/4"
 integrity_cron_minute: "20"
+integrity_cron_command: "/root/bin/integrity -s -me -a"
 
 # clients
 integrity_clients:

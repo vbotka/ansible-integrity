@@ -11,7 +11,7 @@
     name="check integrity of file"
     minute="{{integrity_cron_minute}}"
     hour="{{integrity_cron_hour}}"
-    job="/root/bin/integrity -s -a"
+    job="{{integrity_cron_command}}"
     user="{{integrity_cron_user}}"
 
 # EOF
