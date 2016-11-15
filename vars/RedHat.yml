@@ -7,12 +7,11 @@ integrity_packages:
   - hashdeep
   - freebsd-buildutils
 
-integrity_owner: "root"
 integrity_group: "root"
-
-integrity_conf_HASHDEEP: "/usr/bin/hashdeep"
-integrity_conf_HASHDEEPCONF: "-o f -l -x -k"
-integrity_conf_MTREE: "/usr/bin/fmtree"
+integrity_config_file_group: "root"
+integrity_config_HASHDEEP: "/usr/bin/hashdeep"
+integrity_config_HASHDEEPCONF: "-o f -l -x -k"
+integrity_config_MTREE: "/usr/bin/fmtree"
 
 # EOF
 ...

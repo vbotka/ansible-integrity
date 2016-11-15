@@ -11,7 +11,6 @@ integrity_source_ignore_current_lock: "yes"
 
 # directories
 integrity_owner: "root"
-integrity_group: "wheel"
 integrity_linkdir: "/var/db/integrity/link"
 integrity_metadir: "/var/db/integrity/meta"
 integrity_dir_mode: "0750"
@@ -19,25 +18,36 @@ integrity_bin_dir: "/root/bin"
 integrity_bin_dir_mode: "0755"
 integrity_bin_mode: "0755"
 
+# config
+integrity_config_file: "/etc/integrity"
+integrity_config_file_owner: "root"
+integrity_config_file_mode: "0644"
+integrity_config_EXTHASH: "hashdeep"
+integrity_config_EXTMTREE: "mtree"
+integrity_config_EXTEXCLUDE: "exclude"
+integrity_config_items:
+  - { var: "HASHDEEP", value: "{{integrity_config_HASHDEEP}}" }
+  - { var: "HASHDEEPCONF", value: "{{integrity_config_HASHDEEPCONF}}" }
+  - { var: "MTREE", value: "{{integrity_config_MTREE}}" }
+  - { var: "LINKDIR", value: "{{integrity_linkdir}}" }
+  - { var: "METADIR", value: "{{integrity_metadir}}" }
+  - { var: "EXTHASH", value: "{{integrity_config_EXTHASH}}" }
+  - { var: "EXTMTREE", value: "{{integrity_config_EXTMTREE}}" }
+  - { var: "EXTEXCLUDE", value: "{{integrity_config_EXTEXCLUDE}}" }
+
 # cron
 integrity_cron_user: "root"
 integrity_cron_mailto: "root"
 integrity_cron_hour: "*/4"
 integrity_cron_minute: "20"
-integrity_cron_command: "/root/bin/integrity -s -me -a"
+integrity_cron_command: "/root/bin/integrity -s -a"
 
 # clients
 integrity_clients:
   - { dir: "/root/bin", link: "root-bin" }
-#  - { dir: "/etc", link: "etc" }
-#  - { dir: "/usr/local/etc", link: "usr-local-etc" }
-#  - { dir: "/bin", link: "bin" }
-#  - { dir: "/usr/bin", link: "usr-bin" }
-#  - { dir: "/usr/local/bin", link: "usr-local-bin" }
-#  - { dir: "/sbin", link: "sbin" }
-#  - { dir: "/usr/sbin", link: "usr-sbin" }
-#  - { dir: "/usr/local/sbin", link: "usr-local-sbin" }
-#  - { dir: "/usr/local/etc/letsencrypt/archive", link: "letsencrypt" }
+
+# exclude
+integrity_exclude: []
 
 # EOF
 ...

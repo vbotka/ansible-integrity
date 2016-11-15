@@ -26,11 +26,6 @@
     - integrity_configure
     - integrity_all
 
-- include: copy_exclude_file.yml
-  tags:
-    - integrity_copy_exclude_file
-    - integrity_all
-
 - include: cron.yml
   tags:
     - integrity_cron

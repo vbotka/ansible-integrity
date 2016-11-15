@@ -11,11 +11,11 @@ integrity_packages:
   - gtar
   - md5deep
 
-integrity_owner: "root"
 integrity_group: "wheel"
-integrity_conf_HASHDEEP: "/usr/local/bin/md5deep"
-integrity_conf_HASHDEEPCONF: "-o f -l -x"
-integrity_conf_MTREE: "/usr/sbin/mtree"
+integrity_config_file_group: "wheel"
+integrity_config_HASHDEEP: "/usr/local/bin/md5deep"
+integrity_config_HASHDEEPCONF: "-o f -l -x"
+integrity_config_MTREE: "/usr/sbin/mtree"
 
 # EOF
 ...
