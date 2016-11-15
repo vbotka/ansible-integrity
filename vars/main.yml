@@ -18,26 +18,22 @@
 #    exclude:
 #      - ".*~"
 #      - "*~"
-#      - "#*"
 #  - link: "etc"
 #    exclude:
 #      - ".*~"
 #      - "*~"
-#      - "#*"
 #      - "*etc\\/cups\\/subscriptions.conf*"
 #      - "*etc\\/cups\\/printers.conf*"
 #  - link: "usr-local-etc"
 #    exclude:
 #      - ".*~"
 #      - "*~"
-#      - "#*"
 #      - "*letsencrypt\\/keys\\/*"
 #      - "*letsencrypt\\/csr\\/*"
 #  - link: "usr-local-lib"
 #    exclude:
 #      - ".*~"
 #      - "*~"
-#      - "#*"
 #      - "*perl5\\/site_perl\\/man"
 #      - "*perl5\\/site_perl\\/man\\/whatis"
 #      - "*perl5\\/5.20\\/perl\\/man"
@@ -46,7 +42,6 @@
 #    exclude:
 #      - ".*~"
 #      - "*~"
-#      - "#*"
 #      - "*var\\/backups*"
 
 # EOF
