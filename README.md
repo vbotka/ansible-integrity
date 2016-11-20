@@ -26,6 +26,10 @@ Dependencies.
 
 None.
 
+References.
+-----------
+- [Path names must by preceded by a period](http://unix.stackexchange.com/questions/316210/mtree8-use-of-o/316614)
+
 
 License.
 -------
