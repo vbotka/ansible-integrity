@@ -24,6 +24,7 @@ integrity_config_file_owner: "root"
 integrity_config_file_mode: "0644"
 integrity_config_EXTHASH: "hashdeep"
 integrity_config_EXTMTREE: "mtree"
+integrity_config_EXTMTREEKEYS: "mtreekeys"
 integrity_config_EXTEXCLUDE: "exclude"
 integrity_config_items:
   - { var: "HASHDEEP", value: "{{integrity_config_HASHDEEP}}" }
@@ -46,8 +47,11 @@ integrity_cron_command: "/root/bin/integrity -s -a"
 integrity_clients:
   - { dir: "/root/bin", link: "root-bin" }
 
-# exclude
+# client specific exclude
 integrity_exclude: []
+
+# client specific mtree keywords
+integrity_mtreekeys: []
 
 # EOF
 ...
