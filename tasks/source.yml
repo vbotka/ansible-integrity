@@ -41,6 +41,7 @@
     dest="{{ integrity_source_dest }}/integrity/integrity"
     regexp="#!"
     line="#!{{integrity_which_bash.stdout}}"
+  when: not ansible_check_mode
 
 # EOF
 ...
