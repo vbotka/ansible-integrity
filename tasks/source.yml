@@ -14,7 +14,13 @@
   unarchive: >
     src="{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
     dest="{{ integrity_source_dest }}"
-    copy="no"
+    remote_src="yes"
+    extra_opts="--skip-old-files"
+  changed_when: False
+# TODO: Wait for fixed idempotent unarchive module
+# https://github.com/ansible/ansible-modules-core/issues/3952
+# https://github.com/ansible/ansible/issues/16276
+# https://unix.stackexchange.com/questions/91135/error-handling-with-tar-and-keep-old-files-option
 
 - name: Create symbolic link integrity to {{ integrity_source_dir }}
   file: >
@@ -22,6 +28,19 @@
     dest="{{ integrity_source_dest }}/integrity"
     state="link"
     force="yes"
+
+- name: Which bash
+  command: "which bash"
+  register: integrity_which_bash
+  changed_when: false
+
+#- debug: msg="{{integrity_which_bash.stdout}}"
+
+- name: Patch {{integrity_which_bash.stdout}} in {{ integrity_source_dest }}/integrity/integrity
+  lineinfile: >
+    dest="{{ integrity_source_dest }}/integrity/integrity"
+    regexp="#!"
+    line="#!{{integrity_which_bash.stdout}}"
 
 # EOF
 ...
