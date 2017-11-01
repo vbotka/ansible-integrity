@@ -1,5 +1,10 @@
 ---
-# default vars for ansible-integrity
+# default vars for vbotka.integrity
+
+# FreeBSD
+freebsd_install_method: "packages"
+#freebsd_install_method: "ports"
+#freebsd_use_packages: "yes"
 
 # source
 integrity_source_version: "0.2.7"

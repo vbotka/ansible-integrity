@@ -1,9 +1,5 @@
 ---
-# FreeBSD vars for ansible-integrity
-
-freebsd_install_method: "packages"
-#freebsd_install_method: "ports"
-#freebsd_use_packages: "yes"
+# FreeBSD vars for vbotka.integrity
 
 integrity_packages:
   - shells/bash

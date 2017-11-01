@@ -1,5 +1,5 @@
 ---
-# vars for ansible-integrity
+# vars for vbotka.integrity
 
 #integrity_clients:
 #  - { dir: "/root/bin", link: "root-bin" }

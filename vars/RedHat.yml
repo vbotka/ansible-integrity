@@ -1,5 +1,5 @@
 ---
-# RedHat vars for ansible-integrity
+# RedHat vars for vbotka.integrity
 
 integrity_packages:
   - bash
