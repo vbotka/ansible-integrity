@@ -6,10 +6,10 @@ freebsd_install_method: "packages"
 #freebsd_use_packages: "yes"
 
 integrity_packages:
-  - bash
-  - git
-  - gtar
-  - md5deep
+  - shells/bash
+  - devel/git
+  - archivers/gtar
+  - security/md5deep
 
 integrity_group: "wheel"
 integrity_config_file_group: "wheel"

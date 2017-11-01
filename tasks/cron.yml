@@ -1,18 +1,18 @@
 ---
 
-- name: Configure cron MAILTO="{{integrity_cron_mailto}}"
+- name: Configure cron MAILTO="{{ integrity_cron_mailto }}"
   cronvar: >
     name="MAILTO"
-    value="\"{{integrity_cron_mailto}}\""
-    user="{{integrity_cron_user}}"
+    value="\"{{ integrity_cron_mailto }}\""
+    user="{{ integrity_cron_user }}"
 
 - name: Configure cron files integrity check
   cron: >
     name="check integrity of file"
-    minute="{{integrity_cron_minute}}"
-    hour="{{integrity_cron_hour}}"
-    job="{{integrity_cron_command}}"
-    user="{{integrity_cron_user}}"
+    minute="{{ integrity_cron_minute }}"
+    hour="{{ integrity_cron_hour }}"
+    job="{{ integrity_cron_command }}"
+    user="{{ integrity_cron_user }}"
 
 # EOF
 ...

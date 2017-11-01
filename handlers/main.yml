@@ -3,3 +3,6 @@
 
 - name: Create missing meta data
   command: /root/bin/integrity -s -i -a
+
+# EOF
+...

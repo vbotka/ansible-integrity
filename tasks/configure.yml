@@ -29,20 +29,20 @@
 - name: Create exclude files
   template: >
     src="client.exclude.j2"
-    dest="{{integrity_metadir}}/{{item.link}}.{{integrity_config_EXTEXCLUDE}}"
-    owner="{{integrity_config_file_owner}}"
-    group="{{integrity_config_file_group}}"
-    mode="{{integrity_config_file_mode}}"
+    dest="{{ integrity_metadir }}/{{ item.link }}.{{ integrity_config_EXTEXCLUDE }}"
+    owner="{{ integrity_config_file_owner }}"
+    group="{{ integrity_config_file_group }}"
+    mode="{{ integrity_config_file_mode }}"
     backup="yes"
   with_items: "{{ integrity_exclude }}"
 
 - name: Create mtreekeys files
   template: >
     src="client.mtreekeys.j2"
-    dest="{{integrity_metadir}}/{{item.link}}.{{integrity_config_EXTMTREEKEYS}}"
-    owner="{{integrity_config_file_owner}}"
-    group="{{integrity_config_file_group}}"
-    mode="{{integrity_config_file_mode}}"
+    dest="{{ integrity_metadir }}/{{ item.link }}.{{ integrity_config_EXTMTREEKEYS }}"
+    owner="{{ integrity_config_file_owner }}"
+    group="{{ integrity_config_file_group }}"
+    mode="{{ integrity_config_file_mode }}"
     backup="yes"
   with_items: "{{ integrity_mtreekeys }}"
 

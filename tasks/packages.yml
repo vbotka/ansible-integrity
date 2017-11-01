@@ -9,7 +9,7 @@
     state="present"
   with_items: "{{integrity_packages}}"
   when: (ansible_os_family == "FreeBSD") and (freebsd_install_method == "packages")
-  tags: packages
+  tags: bsd_packages
 
 - name: Install ports
   portinstall: >
@@ -18,7 +18,7 @@
     use_packages="{{freebsd_use_packages}}"
   with_items: "{{integrity_packages}}"
   when: (ansible_os_family == "FreeBSD") and (freebsd_install_method == "ports")
-  tags: ports
+  tags: bsd_ports
 
 # Debian
 - name: Install packages
@@ -27,7 +27,7 @@
     state="installed"
   with_items: "{{integrity_packages}}"
   when: ansible_os_family == "Debian"
-  tags: packages
+  tags: linux_packages
         
 # RedHat
 - name: Install packages
@@ -36,7 +36,7 @@
     state="installed"
   with_items: "{{integrity_packages}}"
   when: ansible_os_family == "RedHat"
-  tags: packages
+  tags: linux_packages
   
 # EOF
 ...
