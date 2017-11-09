@@ -17,6 +17,7 @@
     remote_src="yes"
     extra_opts="--skip-old-files"
   changed_when: False
+  when: not ansible_check_mode
 # TODO: Wait for fixed idempotent unarchive module
 # https://github.com/ansible/ansible-modules-core/issues/3952
 # https://github.com/ansible/ansible/issues/16276
@@ -34,13 +35,13 @@
   register: integrity_which_bash
   changed_when: false
 
-#- debug: msg="{{integrity_which_bash.stdout}}"
+#- debug: msg="{{ integrity_which_bash.stdout }}"
 
-- name: Patch {{integrity_which_bash.stdout}} in {{ integrity_source_dest }}/integrity/integrity
+- name: Patch {{ integrity_which_bash.stdout }} in {{ integrity_source_dest }}/integrity/integrity
   lineinfile: >
     dest="{{ integrity_source_dest }}/integrity/integrity"
     regexp="#!"
-    line="#!{{integrity_which_bash.stdout}}"
+    line="#!{{ integrity_which_bash.stdout }}"
   when: not ansible_check_mode
 
 # EOF

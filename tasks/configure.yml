@@ -8,7 +8,7 @@
     group="{{ integrity_config_file_group }}"
     mode="{{ integrity_config_file_mode }}"
     backup="yes"
-  with_items: "{{integrity_config_items}}"
+  with_items: "{{ integrity_config_items }}"
 
 - name: Create directory for clients {{ integrity_linkdir }}
   file: >
