@@ -1,6 +1,7 @@
 ---
 
-#- debug: msg="{{ ansible_os_family }}"
+- debug: msg="ansible_os_family = {{ ansible_os_family }}"
+  when: integrity_debug|lower == "yes"
 
 # FreeBSD
 - name: Install packages FreeBSD

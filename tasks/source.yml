@@ -15,13 +15,6 @@
     src="{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
     dest="{{ integrity_source_dest }}"
     remote_src="yes"
-    extra_opts="--skip-old-files"
-  changed_when: False
-  when: not ansible_check_mode
-# TODO: Wait for fixed idempotent unarchive module
-# https://github.com/ansible/ansible-modules-core/issues/3952
-# https://github.com/ansible/ansible/issues/16276
-# https://unix.stackexchange.com/questions/91135/error-handling-with-tar-and-keep-old-files-option
 
 - name: Create symbolic link integrity to {{ integrity_source_dir }}
   file: >
@@ -30,19 +23,37 @@
     state="link"
     force="yes"
 
+- name: Create working directory for the scripts {{ integrity_source_dest }}/integrity-work
+  file: >
+    state="directory"
+    path="{{ integrity_source_dest }}/integrity-work"
+
+- name: Copy script to working directory
+  copy: >
+    src="{{ integrity_source_dest }}/integrity/{{ item }}"
+    dest="{{ integrity_source_dest }}/integrity-work"
+    remote_src="yes"
+  with_items:
+    - integrity
+  changed_when: false
+
 - name: Which bash
   command: "which bash"
   register: integrity_which_bash
   changed_when: false
 
-#- debug: msg="{{ integrity_which_bash.stdout }}"
+- debug: msg="Bash path = {{ integrity_which_bash.stdout }}"
+  when: integrity_debug|lower == "yes"
 
-- name: Patch {{ integrity_which_bash.stdout }} in {{ integrity_source_dest }}/integrity/integrity
+- name: Patch {{ integrity_which_bash.stdout }} in {{ integrity_source_dest }}/integrity-work/integrity
   lineinfile: >
-    dest="{{ integrity_source_dest }}/integrity/integrity"
+    dest="{{ integrity_source_dest }}/integrity-work/{{ item }}"
     regexp="#!"
     line="#!{{ integrity_which_bash.stdout }}"
+  with_items:
+    - integrity
   when: not ansible_check_mode
+  changed_when: false
 
 # EOF
 ...

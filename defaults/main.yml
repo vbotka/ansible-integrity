@@ -1,6 +1,8 @@
 ---
 # default vars for vbotka.integrity
 
+integrity_debug: "no"
+
 # FreeBSD
 freebsd_install_method: "packages"
 #freebsd_install_method: "ports"
