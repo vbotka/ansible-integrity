@@ -10,11 +10,22 @@
     url="{{ integrity_source_url }}/{{ integrity_source_file }}"
     dest="{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
 
+- name: Check existence of {{ integrity_source_dest}}/integrity-{{ integrity_source_file }}
+  stat: path="{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
+  register: integrity_source_file_downloaded
+  tags: integrity_source_extract
+
+- debug: msg="integrity_source_file_downloaded {{ integrity_source_file_downloaded }}"
+  when: integrity_debug|lower == "yes"
+  tags: integrity_source_extract
+
 - name: Extract sources to {{ integrity_source_dest }}
   unarchive: >
     src="{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
     dest="{{ integrity_source_dest }}"
     remote_src="yes"
+  when: integrity_source_file_downloaded.stat.exists
+  tags: integrity_source_extract
 
 - name: Create symbolic link integrity to {{ integrity_source_dir }}
   file: >
@@ -22,6 +33,7 @@
     dest="{{ integrity_source_dest }}/integrity"
     state="link"
     force="yes"
+  tags: integrity_source_link
 
 - name: Create working directory for the scripts {{ integrity_source_dest }}/integrity-work
   file: >

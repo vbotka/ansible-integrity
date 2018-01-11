@@ -5,9 +5,10 @@
   register: integrity_current_lock
 
 - debug: msg="[LOCK] integrity-current.lock file is present. Scripts will no be copied."
-  when: integrity_current_lock.stat.exists == True and
-        integrity_source_ignore_current_lock|lower == "no" and
-        integrity_debug|lower == "yes"
+  when:
+    - integrity_current_lock.stat.exists
+    - integrity_source_ignore_current_lock|lower == "no"
+    - integrity_debug|lower == "yes"
 
 - name: Create directory for installation {{ integrity_bin_dir }}
   file: >
@@ -16,7 +17,7 @@
     owner="{{ integrity_owner }}"
     group="{{ integrity_group }}"
     mode="{{ integrity_bin_dir_mode }}"
-  when: integrity_current_lock.stat.exists == False or
+  when: not integrity_current_lock.stat.exists or
         integrity_source_ignore_current_lock|lower == "yes"
 
 - name: Copy script to {{ integrity_bin_dir }}
@@ -29,7 +30,7 @@
     mode="{{ integrity_bin_mode }}"
   with_items:
     - integrity
-  when: (integrity_current_lock.stat.exists == False or
+  when: (not integrity_current_lock.stat.exists or
         integrity_source_ignore_current_lock|lower == "yes") and
         not ansible_check_mode
     

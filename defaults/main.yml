@@ -51,14 +51,13 @@ integrity_cron_minute: "20"
 integrity_cron_command: "/root/bin/integrity -s -a"
 
 # clients
-integrity_clients:
-  - { dir: "/root/bin", link: "root-bin" }
+integrity_clients: {}
 
 # client specific exclude
-integrity_exclude: []
+integrity_exclude: {}
 
 # client specific mtree keywords
-integrity_mtreekeys: []
+integrity_mtreekeys: {}
 
 # EOF
 ...

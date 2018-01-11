@@ -5,7 +5,7 @@
   tags:
     - bsd_packages
     - bsd_ports
-    - integrity_variables
+    - integrity_vars
     - integrity_all
 
 - include: packages.yml
