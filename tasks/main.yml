@@ -8,7 +8,7 @@
     - integrity_vars
     - integrity_all
 
-- include: packages.yml
+- import_tasks: packages.yml
   tags:
     - bsd_packages
     - bsd_ports
@@ -16,22 +16,22 @@
     - integrity_packages
     - integrity_all
 
-- include: source.yml
+- import_tasks: source.yml
   tags:
     - integrity_source
     - integrity_all
 
-- include: copy.yml
+- import_tasks: copy.yml
   tags:
     - integrity_copy
     - integrity_all
 
-- include: configure.yml
+- import_tasks: configure.yml
   tags:
     - integrity_configure
     - integrity_all
 
-- include: cron.yml
+- import_tasks: cron.yml
   tags:
     - integrity_cron
     - integrity_all
