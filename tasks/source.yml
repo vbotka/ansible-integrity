@@ -47,6 +47,7 @@
     remote_src="yes"
   with_items:
     - integrity
+  when: not ansible_check_mode
   changed_when: false
 
 - name: Which bash
