@@ -29,7 +29,7 @@
 - name: Install packages Debian
   apt: >
     name="{{ item }}"
-    state="installed"
+    state="present"
   with_items: "{{ integrity_packages }}"
   when: ansible_os_family == "Debian"
   tags: linux_packages
@@ -38,7 +38,7 @@
 - name: Install packages RedHat
   yum: >
     name="{{ item }}"
-    state="installed"
+    state="present"
   with_items: "{{ integrity_packages }}"
   when: ansible_os_family == "RedHat"
   tags: linux_packages
