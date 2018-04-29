@@ -9,7 +9,7 @@ freebsd_install_method: "packages"
 #freebsd_use_packages: "yes"
 
 # source
-integrity_source_version: "1.0.1"
+integrity_source_version: "1.1.0"
 integrity_source_file: "{{ integrity_source_version }}.tar.gz"
 integrity_source_dir: "integrity-{{ integrity_source_version }}"
 integrity_source_dest: "/usr/local/src"
