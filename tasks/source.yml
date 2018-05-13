@@ -1,5 +1,24 @@
 ---
 
+- name: DEBUG Print variables
+  vars:
+    msg: |
+         url [ {{ integrity_source_url }}/{{ integrity_source_file }} ]
+         dest [ {{ integrity_source_dest }}/integrity-{{ integrity_source_file }} ]
+  debug:
+    msg: "{{ msg.split('\n') }}"
+  when: integrity_debug|lower == "yes"
+
+- name: Test presence of {{ integrity_source_dest }}/integrity-current.lock
+  stat: path="{{ integrity_source_dest }}/integrity-current.lock"
+  register: integrity_current_lock
+
+- debug: msg="DEBUG integrity-current.lock file is present."
+  when:
+    - integrity_current_lock.stat.exists
+    - integrity_source_ignore_current_lock|lower == "no"
+    - integrity_debug|lower == "yes"
+
 - name: Create directory for the source code {{ integrity_source_dest }}
   file: >
     state="directory"
@@ -33,6 +52,8 @@
     dest="{{ integrity_source_dest }}/integrity"
     state="link"
     force="yes"
+  when: (not integrity_current_lock.stat.exists) or
+        (integrity_source_ignore_current_lock|lower == "yes")
   tags: integrity_source_link
 
 - name: Create working directory for the scripts {{ integrity_source_dest }}/integrity-work
