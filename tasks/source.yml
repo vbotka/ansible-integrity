@@ -77,7 +77,9 @@
   changed_when: false
 
 - debug: msg="Bash path = {{ integrity_which_bash.stdout }}"
-  when: integrity_debug|lower == "yes"
+  when:
+    - integrity_debug|lower == "yes"
+    - not ansible_check_mode
 
 - name: Patch {{ integrity_which_bash.stdout }} in {{ integrity_source_dest }}/integrity-work/integrity
   lineinfile: >
