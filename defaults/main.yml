@@ -1,7 +1,7 @@
 ---
 # default vars for vbotka.integrity
 
-integrity_debug: "no"
+integrity_debug: False
 
 # FreeBSD
 freebsd_install_method: "packages"
@@ -44,7 +44,7 @@ integrity_config_items:
   - { var: "EXTEXCLUDE", value: "{{ integrity_config_EXTEXCLUDE }}" }
 
 # cron
-integrity_cron: "yes"
+integrity_cron: True
 integrity_cron_user: "root"
 integrity_cron_mailto: "root"
 integrity_cron_hour: "*/4"

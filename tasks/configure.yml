@@ -1,57 +1,57 @@
 ---
 
-- name: Create configuration {{ integrity_config_file }}
-  template: >
-    src="integrity.config.j2"
-    dest="{{ integrity_config_file }}"
-    owner="{{ integrity_config_file_owner }}"
-    group="{{ integrity_config_file_group }}"
-    mode="{{ integrity_config_file_mode }}"
-    backup="yes"
+- name: "configure: Create configuration {{ integrity_config_file }}"
+  template:
+    src: "integrity.config.j2"
+    dest: "{{ integrity_config_file }}"
+    owner: "{{ integrity_config_file_owner }}"
+    group: "{{ integrity_config_file_group }}"
+    mode: "{{ integrity_config_file_mode }}"
+    backup: yes
   with_items: "{{ integrity_config_items }}"
 
-- name: Create directory for clients {{ integrity_linkdir }}
-  file: >
-    state="directory"
-    path="{{ integrity_linkdir }}"
-    owner="{{ integrity_owner }}"
-    group="{{ integrity_group }}"
-    mode="{{ integrity_dir_mode }}"
+- name: "configure: Create directory for clients {{ integrity_linkdir }}"
+  file:
+    state: "directory"
+    path: "{{ integrity_linkdir }}"
+    owner: "{{ integrity_owner }}"
+    group: "{{ integrity_group }}"
+    mode: "{{ integrity_dir_mode }}"
 
-- name: Create directory for data {{ integrity_metadir }}
-  file: >
-    state="directory"
-    path="{{ integrity_metadir }}"
-    owner="{{ integrity_owner }}"
-    group="{{ integrity_group }}"
-    mode="{{ integrity_dir_mode }}"
+- name: "configure: Create directory for data {{ integrity_metadir }}"
+  file:
+    state: "directory"
+    path: "{{ integrity_metadir }}"
+    owner: "{{ integrity_owner }}"
+    group: "{{ integrity_group }}"
+    mode: "{{ integrity_dir_mode }}"
 
-- name: Create exclude files
-  template: >
-    src="client.exclude.j2"
-    dest="{{ integrity_metadir }}/{{ item.link }}.{{ integrity_config_EXTEXCLUDE }}"
-    owner="{{ integrity_config_file_owner }}"
-    group="{{ integrity_config_file_group }}"
-    mode="{{ integrity_config_file_mode }}"
-    backup="yes"
+- name: "configure: Create exclude files"
+  template:
+    src: "client.exclude.j2"
+    dest: "{{ integrity_metadir }}/{{ item.link }}.{{ integrity_config_EXTEXCLUDE }}"
+    owner: "{{ integrity_config_file_owner }}"
+    group: "{{ integrity_config_file_group }}"
+    mode: "{{ integrity_config_file_mode }}"
+    backup: yes
   with_items: "{{ integrity_exclude }}"
 
-- name: Create mtreekeys files
-  template: >
-    src="client.mtreekeys.j2"
-    dest="{{ integrity_metadir }}/{{ item.link }}.{{ integrity_config_EXTMTREEKEYS }}"
-    owner="{{ integrity_config_file_owner }}"
-    group="{{ integrity_config_file_group }}"
-    mode="{{ integrity_config_file_mode }}"
-    backup="yes"
+- name: "configure: Create mtreekeys files"
+  template:
+    src: "client.mtreekeys.j2"
+    dest: "{{ integrity_metadir }}/{{ item.link }}.{{ integrity_config_EXTMTREEKEYS }}"
+    owner: "{{ integrity_config_file_owner }}"
+    group: "{{ integrity_config_file_group }}"
+    mode: "{{ integrity_config_file_mode }}"
+    backup: yes
   with_items: "{{ integrity_mtreekeys }}"
 
-- name: Create symbolic links to clients
-  file: >
-    src="{{ item.dir }}"
-    dest="{{ integrity_linkdir }}/{{ item.link }}"
-    state="link"
-    force="yes"
+- name: "configure: Create symbolic links to clients"
+  file:
+    src: "{{ item.dir }}"
+    dest: "{{ integrity_linkdir }}/{{ item.link }}"
+    state: "link"
+    force: yes
   with_items: "{{ integrity_clients }}"
   notify: Create missing meta data
 

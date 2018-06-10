@@ -18,7 +18,7 @@ None.
 Role Variables.
 --------------
 
-TBD (Check defaults).
+TBD (Check defaults and examples in vars).
 
 
 Dependencies.

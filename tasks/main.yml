@@ -2,40 +2,23 @@
 
 - name: Add {{ ansible_os_family }} specific variables
   include_vars: "{{ ansible_os_family }}.yml"
-  tags:
-    - bsd_packages
-    - bsd_ports
-    - integrity_vars
-    - integrity_all
+  tags: integrity_vars
 
 - import_tasks: packages.yml
-  tags:
-    - bsd_packages
-    - bsd_ports
-    - linux_packages
-    - integrity_packages
-    - integrity_all
+  tags: integrity_packages
 
 - import_tasks: source.yml
-  tags:
-    - integrity_source
-    - integrity_all
+  tags: integrity_source
 
 - import_tasks: copy.yml
-  tags:
-    - integrity_copy
-    - integrity_all
+  tags: integrity_copy
 
 - import_tasks: configure.yml
-  tags:
-    - integrity_configure
-    - integrity_all
+  tags: integrity_configure
 
 - import_tasks: cron.yml
-  when: integrity_cron|lower == "yes"
-  tags:
-    - integrity_cron
-    - integrity_all
+  when: integrity_cron
+  tags: integrity_cron
 
 # EOF
 ...

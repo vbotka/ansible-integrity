@@ -1,47 +1,33 @@
 ---
 
 - debug: msg="ansible_os_family = {{ ansible_os_family }}"
-  when: integrity_debug|lower == "yes"
+  when: integrity_debug
 
 # FreeBSD
-- name: Install packages FreeBSD
-  pkgng: >
-    name="{{ item }}"
-    state="present"
+- name: "packages: Install packages FreeBSD"
+  pkgng:
+    name: "{{ item }}"
   with_items: "{{ integrity_packages }}"
   when:
     - ansible_os_family == "FreeBSD"
     - freebsd_install_method|lower == "packages"
-  tags: bsd_packages
 
-- name: Install ports FreeBSD
-  portinstall: >
-    name="{{ item }}"
-    state="present"
-    use_packages="{{ freebsd_use_packages }}"
+- name: "packages: Install ports FreeBSD"
+  portinstall:
+    name: "{{ item }}"
+    use_packages: "{{ freebsd_use_packages }}"
   with_items: "{{ integrity_packages }}"
   when:
     - ansible_os_family == "FreeBSD"
     - freebsd_install_method|lower == "ports"
-  tags: bsd_ports
 
-# Debian
-- name: Install packages Debian
-  apt: >
-    name="{{ item }}"
-    state="present"
+# Linux
+- name: "packages: Install packages Linux"
+  package:
+    name: "{{ item }}"
   with_items: "{{ integrity_packages }}"
-  when: ansible_os_family == "Debian"
-  tags: linux_packages
-        
-# RedHat
-- name: Install packages RedHat
-  yum: >
-    name="{{ item }}"
-    state="present"
-  with_items: "{{ integrity_packages }}"
-  when: ansible_os_family == "RedHat"
-  tags: linux_packages
+  when: (ansible_os_family == "Debian") or
+        (ansible_os_family == "RedHat")
   
 # EOF
 ...

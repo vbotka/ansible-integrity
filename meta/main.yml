@@ -1,10 +1,10 @@
 galaxy_info:
   author: Vladimir Botka
-  description: Install integrity from github.com/vbotka/integrity, record metadata (hash/mtree) of specified direcories and configure cron to email alerts about inconsistencies.
+  description: Install integrity from github.com/vbotka/integrity, record metadata (hash/mtree) of specified direcories and configure cron to email alerts if inconsistencies appear.
   company: https://botka.link
   github_branch: master
   license: BSD
-  min_ansible_version: 2.4
+  min_ansible_version: 2.5
   platforms:
     - name: FreeBSD
       versions:
@@ -12,12 +12,10 @@ galaxy_info:
         - 11.0
     - name: Ubuntu
       versions:
-        - xenial
-        - zesty
-        - artful
-    - name: Debian
-    - name: Fedora
+        - bionic
     - name: EL
+      versions:
+        - 7
   galaxy_tags:
     - security
     - ids
