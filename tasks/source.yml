@@ -22,7 +22,7 @@
 
 - name: "source: Create directory for the source code {{ integrity_source_dest }}"
   file:
-    state: "directory"
+    state: directory
     path: "{{ integrity_source_dest }}"
   tags: integrity_source_extract
 
@@ -54,10 +54,10 @@
   file:
     src: "{{ integrity_source_dest }}/{{ integrity_source_dir }}"
     dest: "{{ integrity_source_dest }}/integrity"
-    state: "link"
+    state: link
     force: yes
   when: (not integrity_current_lock.stat.exists) or
-        (integrity_source_ignore_current_lock)
+         integrity_source_ignore_current_lock
   tags: integrity_source_link
 
 - name: "source: Create working directory for the scripts {{ integrity_source_dest }}/integrity-work"

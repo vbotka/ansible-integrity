@@ -14,7 +14,7 @@ integrity_source_file: "{{ integrity_source_version }}.tar.gz"
 integrity_source_dir: "integrity-{{ integrity_source_version }}"
 integrity_source_dest: "/usr/local/src"
 integrity_source_url: "https://github.com/vbotka/integrity/archive"
-integrity_source_ignore_current_lock: "yes"
+integrity_source_ignore_current_lock: False
 
 # directories
 integrity_owner: "root"
