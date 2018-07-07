@@ -14,7 +14,8 @@
     path: "{{ integrity_source_dest }}/integrity-current.lock"
   register: integrity_current_lock
 
-- debug: msg="DEBUG integrity-current.lock file is present."
+- debug:
+    msg: "source: DEBUG integrity-current.lock file is present."
   when:
     - integrity_current_lock.stat.exists
     - not integrity_source_ignore_current_lock
@@ -32,13 +33,14 @@
     dest: "{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
   tags: integrity_source_extract
 
-- name: "source: Check existence of {{ integrity_source_dest}}/integrity-{{ integrity_source_file }}"
+- name: "source: Check existence of {{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
   stat:
     path: "{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
   register: integrity_source_file_downloaded
   tags: integrity_source_extract
 
-- debug: msg="integrity_source_file_downloaded {{ integrity_source_file_downloaded }}"
+- debug:
+    msg: "source: integrity_source_file_downloaded {{ integrity_source_file_downloaded }}"
   when: integrity_debug
   tags: integrity_source_extract
 
@@ -52,9 +54,9 @@
 
 - name: "source: Create symbolic link integrity to {{ integrity_source_dir }}"
   file:
+    state: link
     src: "{{ integrity_source_dest }}/{{ integrity_source_dir }}"
     dest: "{{ integrity_source_dest }}/integrity"
-    state: link
     force: yes
   when: (not integrity_current_lock.stat.exists) or
          integrity_source_ignore_current_lock
@@ -62,7 +64,7 @@
 
 - name: "source: Create working directory for the scripts {{ integrity_source_dest }}/integrity-work"
   file:
-    state: "directory"
+    state: directory
     path: "{{ integrity_source_dest }}/integrity-work"
 
 - name: "source: Copy script to working directory"
@@ -70,7 +72,7 @@
     src: "{{ integrity_source_dest }}/integrity/{{ item }}"
     dest: "{{ integrity_source_dest }}/integrity-work"
     remote_src: yes
-  with_items:
+  loop:
     - integrity
   when: not ansible_check_mode
   changed_when: False
@@ -80,7 +82,8 @@
   register: integrity_which_bash
   changed_when: False
 
-- debug: msg="Bash path = {{ integrity_which_bash.stdout }}"
+- debug:
+    msg: "source: Bash path = {{ integrity_which_bash.stdout }}"
   when:
     - integrity_debug
     - not ansible_check_mode
@@ -90,7 +93,7 @@
     dest: "{{ integrity_source_dest }}/integrity-work/{{ item }}"
     regexp: "#!"
     line: "#!{{ integrity_which_bash.stdout }}"
-  with_items:
+  loop:
     - integrity
   when: not ansible_check_mode
   changed_when: False

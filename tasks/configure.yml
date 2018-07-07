@@ -8,11 +8,11 @@
     group: "{{ integrity_config_file_group }}"
     mode: "{{ integrity_config_file_mode }}"
     backup: yes
-  with_items: "{{ integrity_config_items }}"
+  loop: "{{ integrity_config_items }}"
 
 - name: "configure: Create directory for clients {{ integrity_linkdir }}"
   file:
-    state: "directory"
+    state: directory
     path: "{{ integrity_linkdir }}"
     owner: "{{ integrity_owner }}"
     group: "{{ integrity_group }}"
@@ -20,7 +20,7 @@
 
 - name: "configure: Create directory for data {{ integrity_metadir }}"
   file:
-    state: "directory"
+    state: directory
     path: "{{ integrity_metadir }}"
     owner: "{{ integrity_owner }}"
     group: "{{ integrity_group }}"
@@ -34,7 +34,7 @@
     group: "{{ integrity_config_file_group }}"
     mode: "{{ integrity_config_file_mode }}"
     backup: yes
-  with_items: "{{ integrity_exclude }}"
+  loop: "{{ integrity_exclude }}"
 
 - name: "configure: Create mtreekeys files"
   template:
@@ -44,15 +44,15 @@
     group: "{{ integrity_config_file_group }}"
     mode: "{{ integrity_config_file_mode }}"
     backup: yes
-  with_items: "{{ integrity_mtreekeys }}"
+  loop: "{{ integrity_mtreekeys }}"
 
 - name: "configure: Create symbolic links to clients"
   file:
+    state: link
     src: "{{ item.dir }}"
     dest: "{{ integrity_linkdir }}/{{ item.link }}"
-    state: "link"
     force: yes
-  with_items: "{{ integrity_clients }}"
+  loop: "{{ integrity_clients }}"
   notify: Create missing meta data
 
 # EOF

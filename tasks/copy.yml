@@ -5,7 +5,8 @@
     path: "{{ integrity_source_dest }}/integrity-current.lock"
   register: integrity_current_lock
 
-- debug: msg="[LOCK] integrity-current.lock file is present. Scripts will no be copied."
+- debug:
+    msg: "copy: [LOCK] integrity-current.lock file is present. Scripts will no be copied."
   when:
     - integrity_current_lock.stat.exists
     - not integrity_source_ignore_current_lock
@@ -13,7 +14,7 @@
 
 - name: "copy: Create directory for installation {{ integrity_bin_dir }}"
   file:
-    state: "directory"
+    state: directory
     path: "{{ integrity_bin_dir }}"
     owner: "{{ integrity_owner }}"
     group: "{{ integrity_group }}"
@@ -29,7 +30,7 @@
     group: "{{ integrity_group }}"
     mode: "{{ integrity_bin_mode }}"
     remote_src: yes
-  with_items:
+  loop:
     - integrity
   when:
     - (not integrity_current_lock.stat.exists) or

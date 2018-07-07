@@ -1,13 +1,14 @@
 ---
 
-- debug: msg="ansible_os_family = {{ ansible_os_family }}"
+- debug:
+    msg: "packages: ansible_os_family = {{ ansible_os_family }}"
   when: integrity_debug
 
 # FreeBSD
 - name: "packages: Install packages FreeBSD"
   pkgng:
     name: "{{ item }}"
-  with_items: "{{ integrity_packages }}"
+  loop: "{{ integrity_packages }}"
   when:
     - ansible_os_family == "FreeBSD"
     - freebsd_install_method|lower == "packages"
@@ -16,7 +17,7 @@
   portinstall:
     name: "{{ item }}"
     use_packages: "{{ freebsd_use_packages }}"
-  with_items: "{{ integrity_packages }}"
+  loop: "{{ integrity_packages }}"
   when:
     - ansible_os_family == "FreeBSD"
     - freebsd_install_method|lower == "ports"
@@ -25,7 +26,7 @@
 - name: "packages: Install packages Linux"
   package:
     name: "{{ item }}"
-  with_items: "{{ integrity_packages }}"
+  loop: "{{ integrity_packages }}"
   when: (ansible_os_family == "Debian") or
         (ansible_os_family == "RedHat")
   
