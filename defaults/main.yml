@@ -55,10 +55,10 @@ integrity_cron_command: "/root/bin/integrity -s -a"
 integrity_clients: []
 
 # client specific exclude
-integrity_exclude: {}
+integrity_exclude: []
 
 # client specific mtree keywords
-integrity_mtreekeys: {}
+integrity_mtreekeys: []
 
 # EOF
 ...
