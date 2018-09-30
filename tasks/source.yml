@@ -31,6 +31,7 @@
   get_url:
     url: "{{ integrity_source_url }}/{{ integrity_source_file }}"
     dest: "{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
+    checksum: "{{ integrity_source_checksum }}"
   tags: integrity_source_extract
 
 - name: "source: Check existence of {{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
