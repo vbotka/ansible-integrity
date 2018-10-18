@@ -12,7 +12,7 @@ freebsd_install_method: "packages"
 
 # source
 integrity_source_version: "1.1.2"
-integrity_source_checksum: "sha1:d5a609fe8f13b882e0d977053ce14f42fb473f3a"
+integrity_source_checksum: "sha1:4d00cab989c1023aea9be8f84a9dc6d7da7d7944"
 integrity_source_file: "{{ integrity_source_version }}.tar.gz"
 integrity_source_dir: "integrity-{{ integrity_source_version }}"
 integrity_source_dest: "/usr/local/src"
