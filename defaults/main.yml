@@ -7,8 +7,8 @@ integrity_source_ignore_current_lock: False
 
 # FreeBSD
 freebsd_install_method: "packages"
-#freebsd_install_method: "ports"
-#freebsd_use_packages: "yes"
+# freebsd_install_method: "ports"
+# freebsd_use_packages: "yes"
 
 # source
 integrity_source_version: "1.1.2"
@@ -36,14 +36,22 @@ integrity_config_EXTMTREE: "mtree"
 integrity_config_EXTMTREEKEYS: "mtreekeys"
 integrity_config_EXTEXCLUDE: "exclude"
 integrity_config_items:
-  - { var: "HASHDEEP", value: "{{ integrity_config_HASHDEEP }}" }
-  - { var: "HASHDEEPCONF", value: "{{ integrity_config_HASHDEEPCONF }}" }
-  - { var: "MTREE", value: "{{ integrity_config_MTREE }}" }
-  - { var: "LINKDIR", value: "{{ integrity_linkdir }}" }
-  - { var: "METADIR", value: "{{ integrity_metadir }}" }
-  - { var: "EXTHASH", value: "{{ integrity_config_EXTHASH }}" }
-  - { var: "EXTMTREE", value: "{{ integrity_config_EXTMTREE }}" }
-  - { var: "EXTEXCLUDE", value: "{{ integrity_config_EXTEXCLUDE }}" }
+  - var: "HASHDEEP"
+    value: "{{ integrity_config_HASHDEEP }}"
+  - var: "HASHDEEPCONF"
+    value: "{{ integrity_config_HASHDEEPCONF }}"
+  - var: "MTREE"
+    value: "{{ integrity_config_MTREE }}"
+  - var: "LINKDIR"
+    value: "{{ integrity_linkdir }}"
+  - var: "METADIR"
+    value: "{{ integrity_metadir }}"
+  - var: "EXTHASH"
+    value: "{{ integrity_config_EXTHASH }}"
+  - var: "EXTMTREE"
+    value: "{{ integrity_config_EXTMTREE }}"
+  - var: "EXTEXCLUDE"
+    value: "{{ integrity_config_EXTEXCLUDE }}"
 
 # cron
 integrity_cron_user: "root"

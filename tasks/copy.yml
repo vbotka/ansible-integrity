@@ -5,7 +5,8 @@
     path: "{{ integrity_source_dest }}/integrity-current.lock"
   register: integrity_current_lock
 
-- debug:
+- name: "copy: Debug integrity-current.lock file is present"
+  debug:
     msg: "copy: [LOCK] integrity-current.lock file is present. Scripts will no be copied."
   when:
     - integrity_current_lock.stat.exists
@@ -36,6 +37,6 @@
     - (not integrity_current_lock.stat.exists) or
       integrity_source_ignore_current_lock
     - not ansible_check_mode
-    
+
 # EOF
 ...

@@ -1,7 +1,7 @@
 ---
 # vars for vbotka.integrity
 
-#integrity_clients:
+# integrity_clients:
 #  - { dir: "/root/bin", link: "root-bin" }
 #  - { dir: "/etc", link: "etc" }
 #  - { dir: "/usr/local/etc", link: "usr-local-etc" }
@@ -14,11 +14,11 @@
 #  - { dir: "/usr/local/etc/letsencrypt/archive", link: "letsencrypt" }
 
 # client specific mtree keywords
-#integrity_mtreekeys:
+# integrity_mtreekeys:
 #    - link: "default"
 #      mtreekeys: "gid,link,mode,nlink,size,time,uid"
 
-#integrity_exclude:
+# integrity_exclude:
 #  - link: "default"
 #    exclude:
 #      - ".*~"
