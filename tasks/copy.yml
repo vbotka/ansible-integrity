@@ -23,7 +23,7 @@
   when: (not integrity_current_lock.stat.exists) or
         integrity_source_ignore_current_lock
 
-- name: "copy: Copy script to {{ integrity_bin_dir }}"
+- name: "copy: Copy base scripts to {{ integrity_bin_dir }}"
   copy:
     src: "{{ integrity_source_dest }}/integrity-work/{{ item }}"
     dest: "{{ integrity_bin_dir }}/{{ item }}"
@@ -31,8 +31,21 @@
     group: "{{ integrity_group }}"
     mode: "{{ integrity_bin_mode }}"
     remote_src: yes
-  loop:
-    - integrity
+  loop: "{{ integrity_install_base }}"
+  when:
+    - (not integrity_current_lock.stat.exists) or
+      integrity_source_ignore_current_lock
+    - not ansible_check_mode
+
+- name: "copy: Copy contrib scripts to {{ integrity_bin_dir }}"
+  copy:
+    src: "{{ integrity_source_dest }}/integrity/contrib/{{ ansible_system|lower }}/{{ item }}"
+    dest: "{{ integrity_bin_dir }}/{{ item }}"
+    owner: "{{ integrity_owner }}"
+    group: "{{ integrity_group }}"
+    mode: "{{ integrity_bin_mode }}"
+    remote_src: yes
+  loop: "{{ integrity_install_contrib }}"
   when:
     - (not integrity_current_lock.stat.exists) or
       integrity_source_ignore_current_lock

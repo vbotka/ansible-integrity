@@ -1,7 +1,11 @@
 ---
 
 - import_tasks: vars.yml
-  tags: integrity_vars
+  tags: [integrity_vars, always]
+
+- import_tasks: debug.yml
+  when: integrity_debug
+  tags: [integrity_debug, always]
 
 - import_tasks: packages.yml
   tags: integrity_packages

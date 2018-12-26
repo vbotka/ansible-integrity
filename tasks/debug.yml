@@ -1,0 +1,22 @@
+---
+
+- name: "integrity: Debug"
+  vars:
+    msg: |
+         ansible_system [ {{ ansible_system }} ]
+         ansible_os_family [ {{ ansible_os_family }} ]
+         ansible_architecture [ {{ ansible_architecture }} ]
+         integrity_source_version [ {{ integrity_source_version }} ]
+         integrity_cron [ {{ integrity_cron }} ]
+         integrity_cron_command [ {{ integrity_cron_command }} ]
+         integrity_install_base
+         {{ integrity_install_base | to_nice_yaml }}
+         integrity_install_contrib
+         {{ integrity_install_contrib | to_nice_yaml }}
+         integrity_clients
+         {{ integrity_clients | to_yaml }}
+  debug:
+    msg: "{{ msg.split('\n') }}"
+
+# EOF
+...

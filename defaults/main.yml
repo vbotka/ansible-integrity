@@ -4,6 +4,11 @@
 integrity_debug: False
 integrity_cron: True
 integrity_source_ignore_current_lock: False
+integrity_install_base:
+  - integrity
+integrity_install_contrib:
+  - integrity-create-hash
+  - integrity-check-hash
 
 # FreeBSD
 freebsd_install_method: "packages"
