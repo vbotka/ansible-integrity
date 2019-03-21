@@ -3,9 +3,14 @@
 - name: "integrity: Debug"
   vars:
     msg: |
-         ansible_system [ {{ ansible_system }} ]
-         ansible_os_family [ {{ ansible_os_family }} ]
          ansible_architecture [ {{ ansible_architecture }} ]
+         ansible_os_family [ {{ ansible_os_family }} ]
+         ansible_distribution [ {{ ansible_distribution }} ]
+         ansible_distribution_major_version [ {{ ansible_distribution_major_version }} ]
+         ansible_distribution_version [ {{ ansible_distribution_version }} ]
+         ansible_distribution_release [ {{ ansible_distribution_release }} ]
+
+         integrity_backup_conf [ {{ integrity_backup_conf }} ]
          integrity_source_version [ {{ integrity_source_version }} ]
          integrity_cron [ {{ integrity_cron }} ]
          integrity_cron_command [ {{ integrity_cron_command }} ]

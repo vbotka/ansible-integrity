@@ -7,7 +7,7 @@
     owner: "{{ integrity_config_file_owner }}"
     group: "{{ integrity_config_file_group }}"
     mode: "{{ integrity_config_file_mode }}"
-    backup: yes
+    backup: "{{ integrity_backup_conf }}"
   loop: "{{ integrity_config_items }}"
 
 - name: "configure: Create directory for clients {{ integrity_linkdir }}"
@@ -33,7 +33,7 @@
     owner: "{{ integrity_config_file_owner }}"
     group: "{{ integrity_config_file_group }}"
     mode: "{{ integrity_config_file_mode }}"
-    backup: yes
+    backup: "{{ integrity_backup_conf }}"
   loop: "{{ integrity_exclude }}"
 
 - name: "configure: Create mtreekeys files"
@@ -43,7 +43,7 @@
     owner: "{{ integrity_config_file_owner }}"
     group: "{{ integrity_config_file_group }}"
     mode: "{{ integrity_config_file_mode }}"
-    backup: yes
+    backup: "{{ integrity_backup_conf }}"
   loop: "{{ integrity_mtreekeys }}"
 
 - name: "configure: Create symbolic links to clients"

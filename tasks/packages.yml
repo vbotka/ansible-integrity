@@ -1,7 +1,8 @@
 ---
 
-- debug:
-    msg: "packages: ansible_os_family = {{ ansible_os_family }}"
+- name: "packages: Debug"
+  debug:
+    msg: "packages: ansible_os_family [ {{ ansible_os_family }} ]"
   when: integrity_debug
 
 # FreeBSD
