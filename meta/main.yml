@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: integrity
   author: Vladimir Botka
   description: >
     Install integrity from github.com/vbotka/integrity,
