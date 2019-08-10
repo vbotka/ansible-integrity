@@ -2,10 +2,7 @@
 galaxy_info:
   role_name: integrity
   author: Vladimir Botka
-  description: |
-    Install integrity from github.com/vbotka/integrity,
-    record metadata (hash/mtree) of specified direcories and
-    configure cron to email alerts if inconsistencies appear.
+  description: Install github.com/vbotka/integrity, record metadata, cron alerts.
   company: https://botka.link
   github_branch: master
   license: BSD
@@ -24,5 +21,6 @@ galaxy_info:
   galaxy_tags:
     - security
     - ids
+    - mtree
 dependencies: []
 ...
