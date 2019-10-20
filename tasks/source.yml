@@ -3,11 +3,11 @@
 - name: "source: DEBUG Print variables"
   vars:
     msg: |
-         url [ {{ integrity_source_url }}/{{ integrity_source_file }} ]
-         dest [ {{ integrity_source_dest }}/integrity-{{ integrity_source_file }} ]
+         url [{{ integrity_source_url }}/{{ integrity_source_file }}]
+         dest [{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}]
   debug:
     msg: "{{ msg.split('\n') }}"
-  when: integrity_debug
+  when: integrity_debug|bool
 
 - name: "source: Test presence of {{ integrity_source_dest }}/integrity-current.lock"
   stat:
@@ -18,12 +18,12 @@
     msg: "source: DEBUG integrity-current.lock file is present."
   when:
     - integrity_current_lock.stat.exists
-    - not integrity_source_ignore_current_lock
-    - integrity_debug
+    - not integrity_source_ignore_current_lock|bool
+    - integrity_debug|bool
 
 - name: "source: Create directory for the source code {{ integrity_source_dest }}"
   file:
-    state: directory
+    state: "directory"
     path: "{{ integrity_source_dest }}"
   tags: integrity_source_extract
 
@@ -42,51 +42,51 @@
 
 - debug:
     msg: "source: integrity_source_file_downloaded {{ integrity_source_file_downloaded }}"
-  when: integrity_debug
+  when: integrity_debug|bool
   tags: integrity_source_extract
 
 - name: "source: Extract sources to {{ integrity_source_dest }}"
   unarchive:
     src: "{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
     dest: "{{ integrity_source_dest }}"
-    remote_src: yes
+    remote_src: true
   when: integrity_source_file_downloaded.stat.exists
   tags: integrity_source_extract
 
 - name: "source: Create symbolic link integrity to {{ integrity_source_dir }}"
   file:
-    state: link
+    state: "link"
     src: "{{ integrity_source_dest }}/{{ integrity_source_dir }}"
     dest: "{{ integrity_source_dest }}/integrity"
-    force: yes
+    force: true
   when: (not integrity_current_lock.stat.exists) or
-         integrity_source_ignore_current_lock
+         integrity_source_ignore_current_lock|bool
   tags: integrity_source_link
 
 - name: "source: Create working directory for the scripts {{ integrity_source_dest }}/integrity-work"
   file:
-    state: directory
+    state: "directory"
     path: "{{ integrity_source_dest }}/integrity-work"
 
 - name: "source: Copy script to working directory"
   copy:
     src: "{{ integrity_source_dest }}/integrity/{{ item }}"
     dest: "{{ integrity_source_dest }}/integrity-work"
-    remote_src: yes
+    remote_src: true
   loop:
     - integrity
   when: not ansible_check_mode
-  changed_when: False
+  changed_when: false
 
 - name: "source: Which bash"
   command: "which bash"
   register: integrity_which_bash
-  changed_when: False
+  changed_when: false
 
 - debug:
     msg: "source: Bash path = {{ integrity_which_bash.stdout }}"
   when:
-    - integrity_debug
+    - integrity_debug|bool
     - not ansible_check_mode
 
 - name: "source: Patch {{ integrity_which_bash.stdout }} in {{ integrity_source_dest }}/integrity-work/integrity"
@@ -97,7 +97,7 @@
   loop:
     - integrity
   when: not ansible_check_mode
-  changed_when: False
+  changed_when: false
 
 # EOF
 ...

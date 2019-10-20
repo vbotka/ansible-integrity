@@ -4,10 +4,11 @@
   tags: [integrity_vars, always]
 
 - import_tasks: debug.yml
-  when: integrity_debug
+  when: integrity_debug|bool
   tags: [integrity_debug, always]
 
 - import_tasks: packages.yml
+  when: integrity_install|bool
   tags: integrity_packages
 
 - import_tasks: source.yml
@@ -20,7 +21,7 @@
   tags: integrity_configure
 
 - import_tasks: cron.yml
-  when: integrity_cron
+  when: integrity_cron|bool
   tags: integrity_cron
 
 # EOF

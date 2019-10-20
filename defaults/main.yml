@@ -1,10 +1,12 @@
 ---
 # default vars for vbotka.integrity
 
-integrity_debug: False
-integrity_backup_conf: True
-integrity_cron: True
-integrity_source_ignore_current_lock: False
+integrity_debug: false
+integrity_backup_conf: true
+integrity_cron: true
+integrity_source_ignore_current_lock: false
+
+integrity_install: true
 integrity_install_base:
   - integrity
 integrity_install_contrib:

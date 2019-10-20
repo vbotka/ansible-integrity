@@ -12,7 +12,7 @@
 
 - name: "configure: Create directory for clients {{ integrity_linkdir }}"
   file:
-    state: directory
+    state: "directory"
     path: "{{ integrity_linkdir }}"
     owner: "{{ integrity_owner }}"
     group: "{{ integrity_group }}"
@@ -20,7 +20,7 @@
 
 - name: "configure: Create directory for data {{ integrity_metadir }}"
   file:
-    state: directory
+    state: "directory"
     path: "{{ integrity_metadir }}"
     owner: "{{ integrity_owner }}"
     group: "{{ integrity_group }}"
@@ -48,10 +48,10 @@
 
 - name: "configure: Create symbolic links to clients"
   file:
-    state: link
+    state: "link"
     src: "{{ item.dir }}"
     dest: "{{ integrity_linkdir }}/{{ item.link }}"
-    force: yes
+    force: true
   loop: "{{ integrity_clients }}"
   notify: Create missing meta data
 
