@@ -1,5 +1,5 @@
-integrity
-=========
+# integrity
+
 
 [![Build Status](https://travis-ci.org/vbotka/ansible-integrity.svg?branch=master)](https://travis-ci.org/vbotka/ansible-integrity)
 
@@ -9,22 +9,46 @@ integrity
 - Configure cron to email alerts about inconsistencies.
 
 
-Requirements.
-------------
+## Requirements
+
 
 None.
 
 
-Role Variables.
---------------
+## Role Variables
 
-TBD (Check defaults and examples in vars).
+See defaults and examples in vars.
 
 
-Dependencies.
-------------
+## Dependencies
 
 None.
+
+
+## Best practice
+
+Check syntax
+```
+ansible-playbook integrity.yml --syntax-check
+```
+Install packages
+```
+ansible-playbook integrity.yml -t integrity_packages
+```
+Download source
+```
+ansible-playbook integrity.yml -t integrity_source
+```
+
+Dry-run playbook
+```
+ansible-playbook integrity.yml --check
+```
+Run the playbook twice
+```
+ansible-playbook integrity.yml
+```
+
 
 References.
 -----------
