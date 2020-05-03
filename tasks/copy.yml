@@ -10,7 +10,7 @@
     msg: "copy: [LOCK] integrity-current.lock file is present. Scripts will no be copied."
   when:
     - integrity_current_lock.stat.exists
-    - not integrity_source_ignore_current_lock
+    - not integrity_source_ignore_current_lock|bool
     - integrity_debug|bool
 
 - name: "copy: Create directory for installation {{ integrity_bin_dir }}"

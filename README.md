@@ -8,9 +8,10 @@
 - Record metadata (hash/mtree) of specified direcories
 - Configure cron to email alerts about inconsistencies.
 
+Please feel free to [share your feedback and report issues](https://github.com/vbotka/ansible-integrity/issues). Contributions are welcome.
+
 
 ## Requirements
-
 
 None.
 
@@ -29,39 +30,40 @@ None.
 
 Check syntax
 ```
-ansible-playbook integrity.yml --syntax-check
+shell> ansible-playbook integrity.yml --syntax-check
 ```
+
 Install packages
 ```
-ansible-playbook integrity.yml -t integrity_packages
+shell> ansible-playbook integrity.yml -t integrity_packages
 ```
+
 Download source
 ```
-ansible-playbook integrity.yml -t integrity_source
+shell> ansible-playbook integrity.yml -t integrity_source
 ```
 
 Dry-run playbook
 ```
-ansible-playbook integrity.yml --check
+shell> ansible-playbook integrity.yml --check
 ```
+
 Run the playbook twice
 ```
-ansible-playbook integrity.yml
+shell> ansible-playbook integrity.yml
 ```
 
 
-References.
+## References
 -----------
 - [Path names must by preceded by a period](http://unix.stackexchange.com/questions/316210/mtree8-use-of-o/316614)
 
 
-License.
--------
+## License
 
 [![license](https://img.shields.io/badge/license-BSD-red.svg)](https://www.freebsd.org/doc/en/articles/bsdl-gpl/article.html)
 
 
-Author Information.
-------------------
+## Author Information
 
 [Vladimir Botka](https://botka.link)
