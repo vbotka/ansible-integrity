@@ -1,12 +1,12 @@
 ---
 
 - name: "copy: Test presence of {{ integrity_source_dest }}/integrity-current.lock"
-  stat:
+  ansible.builtin.stat:
     path: "{{ integrity_source_dest }}/integrity-current.lock"
   register: integrity_current_lock
 
 - name: "copy: Debug integrity-current.lock file is present"
-  debug:
+  ansible.builtin.debug:
     msg: "copy: [LOCK] integrity-current.lock file is present. Scripts will no be copied."
   when:
     - integrity_current_lock.stat.exists
@@ -14,7 +14,7 @@
     - integrity_debug|bool
 
 - name: "copy: Create directory for installation {{ integrity_bin_dir }}"
-  file:
+  ansible.builtin.file:
     state: "directory"
     path: "{{ integrity_bin_dir }}"
     owner: "{{ integrity_owner }}"
@@ -24,7 +24,7 @@
         integrity_source_ignore_current_lock|bool
 
 - name: "copy: Copy base scripts to {{ integrity_bin_dir }}"
-  copy:
+  ansible.builtin.copy:
     src: "{{ integrity_source_dest }}/integrity-work/{{ item }}"
     dest: "{{ integrity_bin_dir }}/{{ item }}"
     owner: "{{ integrity_owner }}"
@@ -37,7 +37,7 @@
         (not ansible_check_mode)
 
 - name: "copy: Copy contrib scripts to {{ integrity_bin_dir }}"
-  copy:
+  ansible.builtin.copy:
     src: "{{ integrity_source_dest }}/integrity/contrib/{{ ansible_system|lower }}/{{ item }}"
     dest: "{{ integrity_bin_dir }}/{{ item }}"
     owner: "{{ integrity_owner }}"

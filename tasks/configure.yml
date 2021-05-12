@@ -1,8 +1,8 @@
 ---
 
 - name: "configure: Create configuration {{ integrity_config_file }}"
-  template:
-    src: "integrity.config.j2"
+  ansible.builtin.template:
+    src: integrity.config.j2
     dest: "{{ integrity_config_file }}"
     owner: "{{ integrity_config_file_owner }}"
     group: "{{ integrity_config_file_group }}"
@@ -11,24 +11,24 @@
   loop: "{{ integrity_config_items }}"
 
 - name: "configure: Create directory for clients {{ integrity_linkdir }}"
-  file:
-    state: "directory"
+  ansible.builtin.file:
+    state: directory
     path: "{{ integrity_linkdir }}"
     owner: "{{ integrity_owner }}"
     group: "{{ integrity_group }}"
     mode: "{{ integrity_dir_mode }}"
 
 - name: "configure: Create directory for data {{ integrity_metadir }}"
-  file:
-    state: "directory"
+  ansible.builtin.file:
+    state: directory
     path: "{{ integrity_metadir }}"
     owner: "{{ integrity_owner }}"
     group: "{{ integrity_group }}"
     mode: "{{ integrity_dir_mode }}"
 
 - name: "configure: Create exclude files"
-  template:
-    src: "client.exclude.j2"
+  ansible.builtin.template:
+    src: client.exclude.j2
     dest: "{{ integrity_metadir }}/{{ item.link }}.{{ integrity_config_EXTEXCLUDE }}"
     owner: "{{ integrity_config_file_owner }}"
     group: "{{ integrity_config_file_group }}"
@@ -37,8 +37,8 @@
   loop: "{{ integrity_exclude }}"
 
 - name: "configure: Create mtreekeys files"
-  template:
-    src: "client.mtreekeys.j2"
+  ansible.builtin.template:
+    src: client.mtreekeys.j2
     dest: "{{ integrity_metadir }}/{{ item.link }}.{{ integrity_config_EXTMTREEKEYS }}"
     owner: "{{ integrity_config_file_owner }}"
     group: "{{ integrity_config_file_group }}"
@@ -47,8 +47,8 @@
   loop: "{{ integrity_mtreekeys }}"
 
 - name: "configure: Create symbolic links to clients"
-  file:
-    state: "link"
+  ansible.builtin.file:
+    state: link
     src: "{{ item.dir }}"
     dest: "{{ integrity_linkdir }}/{{ item.link }}"
     force: true

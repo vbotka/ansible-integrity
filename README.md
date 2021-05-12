@@ -14,17 +14,14 @@ Feel free to [share your feedback and report issues](https://github.com/vbotka/a
 
 ## Requirements
 
-None.
+### Collections
+
+* community.general
 
 
 ## Role Variables
 
 See defaults and examples in vars.
-
-
-## Dependencies
-
-None.
 
 
 ## Best practice

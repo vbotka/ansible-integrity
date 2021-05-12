@@ -5,16 +5,17 @@
     msg: |
          url [{{ integrity_source_url }}/{{ integrity_source_file }}]
          dest [{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}]
-  debug:
+  ansible.builtin.debug:
     msg: "{{ msg.split('\n') }}"
   when: integrity_debug|bool
 
 - name: "source: Test presence of {{ integrity_source_dest }}/integrity-current.lock"
-  stat:
+  ansible.builtin.stat:
     path: "{{ integrity_source_dest }}/integrity-current.lock"
   register: integrity_current_lock
 
-- debug:
+- name: "source: Debug integrity-current.lock file is present."
+  ansible.builtin.debug:
     msg: "source: DEBUG integrity-current.lock file is present."
   when:
     - integrity_current_lock.stat.exists
@@ -22,31 +23,32 @@
     - integrity_debug|bool
 
 - name: "source: Create directory for the source code {{ integrity_source_dest }}"
-  file:
-    state: "directory"
+  ansible.builtin.file:
+    state: directory
     path: "{{ integrity_source_dest }}"
   tags: integrity_source_extract
 
 - name: "source: Download {{ integrity_source_url }}/{{ integrity_source_file }}"
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ integrity_source_url }}/{{ integrity_source_file }}"
     dest: "{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
     checksum: "{{ integrity_source_checksum }}"
   tags: integrity_source_extract
 
 - name: "source: Check existence of {{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
-  stat:
+  ansible.builtin.stat:
     path: "{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
   register: integrity_source_file_downloaded
   tags: integrity_source_extract
 
-- debug:
+- name: "source: Debug integrity_source_file_downloaded."
+  ansible.builtin.debug:
     msg: "source: integrity_source_file_downloaded {{ integrity_source_file_downloaded }}"
   when: integrity_debug|bool
   tags: integrity_source_extract
 
 - name: "source: Extract sources to {{ integrity_source_dest }}"
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
     dest: "{{ integrity_source_dest }}"
     remote_src: true
@@ -54,8 +56,8 @@
   tags: integrity_source_extract
 
 - name: "source: Create symbolic link integrity to {{ integrity_source_dir }}"
-  file:
-    state: "link"
+  ansible.builtin.file:
+    state: link
     src: "{{ integrity_source_dest }}/{{ integrity_source_dir }}"
     dest: "{{ integrity_source_dest }}/integrity"
     force: true
@@ -64,12 +66,12 @@
   tags: integrity_source_link
 
 - name: "source: Create working directory for the scripts {{ integrity_source_dest }}/integrity-work"
-  file:
-    state: "directory"
+  ansible.builtin.file:
+    state: directory
     path: "{{ integrity_source_dest }}/integrity-work"
 
 - name: "source: Copy script to working directory"
-  copy:
+  ansible.builtin.copy:
     src: "{{ integrity_source_dest }}/integrity/{{ item }}"
     dest: "{{ integrity_source_dest }}/integrity-work"
     remote_src: true
@@ -79,18 +81,20 @@
   changed_when: false
 
 - name: "source: Which bash"
-  command: "which bash"
+  command:
+    cmd: which bash
   register: integrity_which_bash
   changed_when: false
 
-- debug:
+- name: "source: Debug bash path"
+  ansible.builtin.debug:
     msg: "source: Bash path = {{ integrity_which_bash.stdout }}"
   when:
     - integrity_debug|bool
     - not ansible_check_mode
 
 - name: "source: Patch {{ integrity_which_bash.stdout }} in {{ integrity_source_dest }}/integrity-work/integrity"
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ integrity_source_dest }}/integrity-work/{{ item }}"
     regexp: "#!"
     line: "#!{{ integrity_which_bash.stdout }}"
