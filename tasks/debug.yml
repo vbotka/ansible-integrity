@@ -22,7 +22,7 @@
          {{ integrity_install_contrib|to_nice_yaml }}
          integrity_clients
          {{ integrity_clients|to_yaml }}
-  debug:
+  ansible.builtin.debug:
     msg: "{{ msg.split('\n') }}"
 
 # EOF
