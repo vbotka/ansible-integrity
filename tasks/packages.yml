@@ -7,7 +7,7 @@
 
 # FreeBSD
 - name: "packages: Install packages FreeBSD"
-  ansible.builtin.pkgng:
+  community.general.pkgng:
     name: "{{ integrity_packages }}"
   register: result
   retries: "{{ freebsd_install_retries }}"
@@ -18,7 +18,7 @@
     - freebsd_install_method|lower == "packages"
 
 - name: "packages: Install ports FreeBSD"
-  ansible.builtin.portinstall:
+  community.general.portinstall:
     name: "{{ item }}"
     use_packages: "{{ freebsd_use_packages }}"
   loop: "{{ integrity_packages }}"
