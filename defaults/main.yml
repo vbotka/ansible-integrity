@@ -16,7 +16,7 @@ integrity_install_contrib:
 # FreeBSD
 freebsd_install_method: packages
 # freebsd_install_method: ports
-# freebsd_use_packages: true
+freebsd_use_packages: true
 freebsd_install_retries: 10
 freebsd_install_delay: 5
 # Linux
@@ -29,6 +29,7 @@ integrity_source_checksum: "sha1:4d00cab989c1023aea9be8f84a9dc6d7da7d7944"
 integrity_source_file: "{{ integrity_source_version }}.tar.gz"
 integrity_source_dir: "integrity-{{ integrity_source_version }}"
 integrity_source_dest: /usr/local/src
+integrity_source_dest_mode: "0755"
 integrity_source_url: "https://github.com/vbotka/integrity/archive"
 
 # directories
@@ -44,27 +45,27 @@ integrity_bin_mode: "0755"
 integrity_config_file: /etc/integrity
 integrity_config_file_owner: root
 integrity_config_file_mode: "0644"
-integrity_config_EXTHASH: hashdeep
-integrity_config_EXTMTREE: mtree
-integrity_config_EXTMTREEKEYS: mtreekeys
-integrity_config_EXTEXCLUDE: exclude
+integrity_config_exthash: hashdeep
+integrity_config_extmtree: mtree
+integrity_config_extmtreekeys: mtreekeys
+integrity_config_extexclude: exclude
 integrity_config_items:
   - var: HASHDEEP
-    value: "{{ integrity_config_HASHDEEP }}"
+    value: "{{ integrity_config_hashdeep }}"
   - var: HASHDEEPCONF
-    value: "{{ integrity_config_HASHDEEPCONF }}"
+    value: "{{ integrity_config_hashdeepconf }}"
   - var: MTREE
-    value: "{{ integrity_config_MTREE }}"
+    value: "{{ integrity_config_mtree }}"
   - var: LINKDIR
     value: "{{ integrity_linkdir }}"
   - var: METADIR
     value: "{{ integrity_metadir }}"
   - var: EXTHASH
-    value: "{{ integrity_config_EXTHASH }}"
+    value: "{{ integrity_config_exthash }}"
   - var: EXTMTREE
-    value: "{{ integrity_config_EXTMTREE }}"
+    value: "{{ integrity_config_extmtree }}"
   - var: EXTEXCLUDE
-    value: "{{ integrity_config_EXTEXCLUDE }}"
+    value: "{{ integrity_config_extexclude }}"
 
 # cron
 integrity_cron_user: root

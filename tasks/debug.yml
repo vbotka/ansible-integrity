@@ -12,10 +12,33 @@
          ansible_python_version [{{ ansible_python_version }}]
 
          integrity_backup_conf [{{ integrity_backup_conf }}]
+         integrity_source_ignore_current_lock [{{ integrity_source_ignore_current_lock }}]
          integrity_source_version [{{ integrity_source_version }}]
+         integrity_source_file [{{ integrity_source_file }}]
+         integrity_source_dir [{{ integrity_source_dir }}]
+         integrity_source_dest [{{ integrity_source_dest }}]
+         integrity_source_dest_mode [{{ integrity_source_dest_mode }}]
+         integrity_source_url [{{ integrity_source_url }}]
+         integrity_owner [{{ integrity_owner }}]
+         integrity_linkdir [{{ integrity_linkdir }}]
+         integrity_metadir [{{ integrity_metadir }}]
+         integrity_dir_mode [{{ integrity_dir_mode }}]
+         integrity_bin_dir [{{ integrity_bin_dir }}]
+         integrity_bin_dir_mode [{{ integrity_bin_dir_mode }}]
+         integrity_bin_mode [{{ integrity_bin_mode }}]
+         integrity_config_file [{{ integrity_config_file }}]
+         integrity_config_items
+         {{ integrity_config_items|to_yaml }}
          integrity_cron [{{ integrity_cron }}]
          integrity_cron_command [{{ integrity_cron_command }}]
+
          integrity_install [{{ integrity_install }}]
+         freebsd_install_method [{{ freebsd_install_method }}]
+         freebsd_use_packages [{{ freebsd_use_packages }}]
+         freebsd_install_retries [{{ freebsd_install_retries }}]
+         freebsd_install_delay [{{ freebsd_install_delay }}]
+         linux_install_retries [{{ linux_install_retries }}]
+         linux_install_delay [{{ linux_install_delay }}]
          integrity_install_base
          {{ integrity_install_base|to_nice_yaml }}
          integrity_install_contrib
