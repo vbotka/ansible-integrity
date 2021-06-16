@@ -26,6 +26,7 @@
   ansible.builtin.file:
     state: directory
     path: "{{ integrity_source_dest }}"
+    mode: "{{ integrity_source_dest_mode }}"
   tags: integrity_source_extract
 
 - name: "source: Download {{ integrity_source_url }}/{{ integrity_source_file }}"
@@ -69,11 +70,13 @@
   ansible.builtin.file:
     state: directory
     path: "{{ integrity_source_dest }}/integrity-work"
+    mode: "{{ integrity_source_dest_mode }}"
 
 - name: "source: Copy script to working directory"
   ansible.builtin.copy:
     src: "{{ integrity_source_dest }}/integrity/{{ item }}"
     dest: "{{ integrity_source_dest }}/integrity-work"
+    mode: "{{ integrity_bin_mode }}"
     remote_src: true
   loop:
     - integrity
@@ -81,7 +84,7 @@
   changed_when: false
 
 - name: "source: Which bash"
-  command:
+  ansible.builtin.command:
     cmd: which bash
   register: integrity_which_bash
   changed_when: false

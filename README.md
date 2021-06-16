@@ -4,7 +4,7 @@
 
 [Ansible role](https://galaxy.ansible.com/vbotka/integrity/).
 - Install [integrity](https://github.com/vbotka/integrity)
-- Record metadata (hash/mtree) of specified direcories
+- Record metadata (hash/mtree) of specified directories
 - Configure cron to email alerts.
 
 Feel free to [share your feedback and report issues](https://github.com/vbotka/ansible-integrity/issues).
@@ -14,39 +14,56 @@ Feel free to [share your feedback and report issues](https://github.com/vbotka/a
 
 ## Requirements
 
+### Roles
+
+* Ansible role [vbotka.ansible_lib](https://galaxy.ansible.com/vbotka/ansible_lib)
+
 ### Collections
 
 * community.general
 
 
-## Role Variables
+## Variables
 
 See defaults and examples in vars.
 
 
 ## Best practice
 
-Check syntax
+Install the roles and collections
+
+```
+ansible-galaxy role install vbotka.integrity
+ansible-galaxy role install vbotka.ansible_lib
+ansible-galaxy collection install community.general
+```
+
+Create the playbook and inventory. Check the syntax
+
 ```
 shell> ansible-playbook integrity.yml --syntax-check
 ```
 
 Install packages
+
 ```
 shell> ansible-playbook integrity.yml -t integrity_packages
 ```
 
 Download source
+
 ```
 shell> ansible-playbook integrity.yml -t integrity_source
 ```
 
 Dry-run playbook
+
 ```
 shell> ansible-playbook integrity.yml --check
 ```
 
 Run the playbook twice
+
 ```
 shell> ansible-playbook integrity.yml
 ```

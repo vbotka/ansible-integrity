@@ -1,26 +1,33 @@
 ---
 
-- import_tasks: vars.yml
+- name: Import vars.yml
+  ansible.builtin.import_tasks: vars.yml
   tags: [integrity_vars, always]
 
-- import_tasks: debug.yml
+- name: Import debug.yml
+  ansible.builtin.import_tasks: debug.yml
   when: integrity_debug|bool
   tags: [integrity_debug, always]
 
-- import_tasks: packages.yml
+- name: Import packages.yml
+  ansible.builtin.import_tasks: packages.yml
   when: integrity_install|bool
   tags: integrity_packages
 
-- import_tasks: source.yml
+- name: Import source.yml
+  ansible.builtin.import_tasks: source.yml
   tags: integrity_source
 
-- import_tasks: copy.yml
+- name: Import copy.yml
+  ansible.builtin.import_tasks: copy.yml
   tags: integrity_copy
 
-- import_tasks: configure.yml
+- name: Import configure.yml
+  ansible.builtin.import_tasks: configure.yml
   tags: integrity_configure
 
-- import_tasks: cron.yml
+- name: Import cron.yml
+  ansible.builtin.import_tasks: cron.yml
   when: integrity_cron|bool
   tags: integrity_cron
 
