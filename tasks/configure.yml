@@ -35,6 +35,8 @@
     mode: "{{ integrity_config_file_mode }}"
     backup: "{{ integrity_backup_conf }}"
   loop: "{{ integrity_exclude }}"
+  loop_control:
+    label: "{{ item.link }}"
 
 - name: "configure: Create mtreekeys files"
   ansible.builtin.template:

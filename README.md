@@ -1,6 +1,6 @@
 # integrity
 
-[![quality](https://img.shields.io/ansible/quality/27910)](https://galaxy.ansible.com/vbotka/integrity)[![Build Status](https://travis-ci.org/vbotka/ansible-integrity.svg?branch=master)](https://travis-ci.org/vbotka/ansible-integrity)
+[![quality](https://img.shields.io/ansible/quality/27910)](https://galaxy.ansible.com/vbotka/integrity)[![Build Status](https://app.travis-ci.com/vbotka/ansible-integrity.svg?branch=master)](https://app.travis-ci.com/vbotka/ansible-integrity)
 
 [Ansible role](https://galaxy.ansible.com/vbotka/integrity/).
 - Install [integrity](https://github.com/vbotka/integrity)
@@ -81,4 +81,4 @@ shell> ansible-playbook integrity.yml
 
 ## Author Information
 
-[Vladimir Botka](https://botka.link)
+[Vladimir Botka](https://botka.info)

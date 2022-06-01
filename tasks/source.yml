@@ -2,9 +2,9 @@
 
 - name: "source: DEBUG Print variables"
   vars:
-    msg: |
-         url [{{ integrity_source_url }}/{{ integrity_source_file }}]
-         dest [{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}]
+    msg: |-
+         url: {{ integrity_source_url }}/{{ integrity_source_file }}
+         dest: {{ integrity_source_dest }}/integrity-{{ integrity_source_file }}
   ansible.builtin.debug:
     msg: "{{ msg.split('\n') }}"
   when: integrity_debug|bool
@@ -44,7 +44,9 @@
 
 - name: "source: Debug integrity_source_file_downloaded."
   ansible.builtin.debug:
-    msg: "source: integrity_source_file_downloaded {{ integrity_source_file_downloaded }}"
+    msg: |-
+      integrity_source_file_downloaded:
+        {{ integrity_source_file_downloaded|to_yaml|indent(2) }}
   when: integrity_debug|bool
   tags: integrity_source_extract
 
