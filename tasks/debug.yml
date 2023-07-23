@@ -28,7 +28,7 @@
          integrity_bin_mode: {{ integrity_bin_mode }}
          integrity_config_file: {{ integrity_config_file }}
          integrity_config_items:
-           {{ integrity_config_items|to_yaml|indent(2) }}
+           {{ integrity_config_items|to_yaml(indent=2)|indent(2) }}
          integrity_cron: {{ integrity_cron }}
          integrity_cron_command: {{ integrity_cron_command }}
 
@@ -40,11 +40,11 @@
          linux_install_retries: {{ linux_install_retries }}
          linux_install_delay: {{ linux_install_delay }}
          integrity_install_base:
-           {{ integrity_install_base|to_nice_yaml|indent(2) }}
+           {{ integrity_install_base|to_nice_yaml(indent=2)|indent(2) }}
          integrity_install_contrib:
-           {{ integrity_install_contrib|to_nice_yaml|indent(2) }}
+           {{ integrity_install_contrib|to_nice_yaml(indent=2)|indent(2) }}
          integrity_clients:
-           {{ integrity_clients|to_yaml|indent(2) }}
+           {{ integrity_clients|to_yaml(indent=2)|indent(2) }}
   ansible.builtin.debug:
     msg: "{{ '{}'.format(msg) }}"
 
