@@ -23,6 +23,13 @@ Feel free to [share your feedback and report issues](https://github.com/vbotka/a
 * community.general
 
 
+### Packages
+
+* Linux: hashdeep, freebsd-buildutils
+* FreeBSD: security/md5deep
+
+Note: RH package *md5deep* provides *hashdeep*. There is no package in RH that provides *fmtree*.
+
 ## Variables
 
 See defaults and examples in vars.

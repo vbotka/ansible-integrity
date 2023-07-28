@@ -7,11 +7,11 @@ integrity_packages:
   - archivers/gtar
   - security/md5deep
 
-integrity_group: "wheel"
-integrity_config_file_group: "wheel"
-integrity_config_hashdeep: "/usr/local/bin/md5deep"
-integrity_config_hashdeepconf: "-o f -l -x"
-integrity_config_mtree: "/usr/sbin/mtree"
+integrity_group: wheel
+integrity_config_file_group: wheel
+integrity_config_hashdeep: /usr/local/bin/md5deep
+integrity_config_hashdeepconf: -o f -l -x
+integrity_config_mtree: /usr/sbin/mtree
 
 # EOF
 ...

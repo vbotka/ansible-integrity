@@ -70,8 +70,8 @@ integrity_config_items:
 # cron
 integrity_cron_user: root
 integrity_cron_mailto: root
-integrity_cron_hour: "*/4"
-integrity_cron_minute: "20"
+integrity_cron_hour: '*/4'
+integrity_cron_minute: '20'
 integrity_cron_command: /root/bin/integrity -s -a
 
 # clients

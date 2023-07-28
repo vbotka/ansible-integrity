@@ -2,52 +2,52 @@
 # vars samplex for vbotka.integrity
 
 # integrity_clients:
-#  - {dir: "/root/bin", link: "root-bin"}
-#  - {dir: "/etc", link: "etc"}
-#  - {dir: "/usr/local/etc", link: "usr-local-etc"}
-#  - {dir: "/bin", link: "bin"}
-#  - {dir: "/usr/bin", link: "usr-bin"}
-#  - {dir: "/usr/local/bin", link: "usr-local-bin"}
-#  - {dir: "/sbin", link: "sbin"}
-#  - {dir: "/usr/sbin", link: "usr-sbin"}
-#  - {dir: "/usr/local/sbin", link: "usr-local-sbin"}
-#  - {dir: "/usr/local/etc/letsencrypt/archive", link: "letsencrypt"}
+#  - {dir: /root/bin, link: root-bin}
+#  - {dir: /etc, link: etc}
+#  - {dir: /usr/local/etc, link: usr-local-etc}
+#  - {dir: /bin, link: bin}
+#  - {dir: /usr/bin, link: usr-bin}
+#  - {dir: /usr/local/bin, link: usr-local-bin}
+#  - {dir: /sbin, link: sbin}
+#  - {dir: /usr/sbin, link: usr-sbin}
+#  - {dir: /usr/local/sbin, link: usr-local-sbin}
+#  - {dir: /usr/local/etc/letsencrypt/archive, link: letsencrypt}
 
 # client specific mtree keywords
 # integrity_mtreekeys:
 #    - link: default
-#      mtreekeys: "gid,link,mode,nlink,size,time,uid"
+#      mtreekeys: 'gid,link,mode,nlink,size,time,uid'
 
 # integrity_exclude:
 #  - link: default
 #    exclude:
-#      - ".*~"
-#      - "*~"
+#      - '.*~'
+#      - '*~'
 #  - link: etc
 #    exclude:
-#      - ".*~"
-#      - "*~"
-#      - "*etc\\/cups\\/subscriptions.conf*"
-#      - "*etc\\/cups\\/printers.conf*"
+#      - '.*~'
+#      - '*~'
+#      - '*etc\\/cups\\/subscriptions.conf*'
+#      - '*etc\\/cups\\/printers.conf*'
 #  - link: usr-local-etc
 #    exclude:
-#      - ".*~"
-#      - "*~"
-#      - "*letsencrypt\\/keys\\/*"
-#      - "*letsencrypt\\/csr\\/*"
+#      - '.*~'
+#      - '*~'
+#      - '*letsencrypt\\/keys\\/*'
+#      - '*letsencrypt\\/csr\\/*'
 #  - link: usr-local-lib
 #    exclude:
-#      - ".*~"
-#      - "*~"
-#      - "*perl5\\/site_perl\\/man"
-#      - "*perl5\\/site_perl\\/man\\/whatis"
-#      - "*perl5\\/5.20\\/perl\\/man"
-#      - "*perl5\\/5.20\\/perl\\/man\\/whatis"
+#      - '.*~'
+#      - '*~'
+#      - '*perl5\\/site_perl\\/man'
+#      - '*perl5\\/site_perl\\/man\\/whatis'
+#      - '*perl5\\/5.20\\/perl\\/man'
+#      - '*perl5\\/5.20\\/perl\\/man\\/whatis'
 #  - link: host123
 #    exclude:
-#      - ".*~"
-#      - "*~"
-#      - "*var\\/backups*"
+#      - '.*~'
+#      - '*~'
+#      - '*var\\/backups*'
 
 # EOF
 ...
