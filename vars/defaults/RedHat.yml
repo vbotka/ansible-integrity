@@ -5,11 +5,11 @@ integrity_packages:
   - bash
   - git
   - md5deep
-  - freebsd-buildutils
+  # - freebsd-buildutils
 
 integrity_group: root
 integrity_config_file_group: root
-integrity_config_hashdeep: /bin/hashdeep
+integrity_config_hashdeep: /usr/bin/md5deep
 integrity_config_hashdeepconf: -o f -l -x -k
 integrity_config_mtree: /usr/bin/fmtree
 
