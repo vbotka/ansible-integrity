@@ -6,7 +6,7 @@
          url: {{ integrity_source_url }}/{{ integrity_source_file }}
          dest: {{ integrity_source_dest }}/integrity-{{ integrity_source_file }}
   ansible.builtin.debug:
-    msg: "{{ msg.split('\n') }}"
+    msg: "{{ '{}'.format(msg) }}"
   when: integrity_debug|bool
 
 - name: "source: Test presence of {{ integrity_source_dest }}/integrity-current.lock"
@@ -16,7 +16,7 @@
 
 - name: "source: Debug integrity-current.lock file is present."
   ansible.builtin.debug:
-    msg: "source: DEBUG integrity-current.lock file is present."
+    msg: "[LOCK] integrity-current.lock file is present."
   when:
     - integrity_current_lock.stat.exists
     - not integrity_source_ignore_current_lock|bool
@@ -46,7 +46,7 @@
   ansible.builtin.debug:
     msg: |-
       integrity_source_file_downloaded:
-        {{ integrity_source_file_downloaded|to_yaml|indent(2) }}
+        {{ integrity_source_file_downloaded|to_yaml(indent=2)|indent(2) }}
   when: integrity_debug|bool
   tags: integrity_source_extract
 
@@ -93,7 +93,7 @@
 
 - name: "source: Debug bash path"
   ansible.builtin.debug:
-    msg: "source: Bash path = {{ integrity_which_bash.stdout }}"
+    msg: "Bash path: {{ integrity_which_bash.stdout }}"
   when:
     - integrity_debug|bool
     - not ansible_check_mode
