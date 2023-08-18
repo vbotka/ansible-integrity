@@ -1,45 +1,64 @@
 ---
 
-- name: "packages: Debug"
-  ansible.builtin.debug:
-    msg: "ansible_os_family: {{ ansible_os_family }}"
-  when: integrity_debug|bool
-
 # FreeBSD
-- name: "packages: Install packages FreeBSD"
-  community.general.pkgng:
-    name: "{{ integrity_packages }}"
-  register: result
-  retries: "{{ freebsd_install_retries }}"
-  until: result is succeeded
-  delay: "{{ freebsd_install_delay }}"
+- name: "packages: Install FreeBSD packages"
+  block:
+    - name: "packages: Install FreeBSD packages"
+      community.general.pkgng:
+        name: "{{ integrity_packages }}"
+      register: result
+      retries: "{{ freebsd_install_retries }}"
+      until: result is succeeded
+      delay: "{{ freebsd_install_delay }}"
+  rescue:
+    - name: "packages: Rescue FreeBSD packages"
+      ansible.builtin.fail:
+        msg: |
+          [ERROR] task {{ ansible_failed_task.name }} failed.
+          ansible_failed_task:
+            {{ ansible_failed_task|to_yaml(indent=2)|indent(2) }}
+          ansible_failed_result:
+            {{ ansible_failed_result|to_yaml(indent=2)|indent(2) }}
   when:
     - ansible_os_family == 'FreeBSD'
     - freebsd_install_method|lower == 'packages'
 
-- name: "packages: Install ports FreeBSD"
-  community.general.portinstall:
-    name: "{{ item }}"
-    use_packages: "{{ freebsd_use_packages }}"
-  loop: "{{ integrity_packages }}"
-  register: result
-  retries: "{{ freebsd_install_retries }}"
-  until: result is succeeded
-  delay: "{{ freebsd_install_delay }}"
+- name: "packages: Install FreeBSD ports"
+  block:
+    - name: "packages: Install FreeBSD ports"
+      community.general.portinstall:
+        name: "{{ item }}"
+        use_packages: "{{ freebsd_use_packages }}"
+      loop: "{{ integrity_packages }}"
+      register: result
+      retries: "{{ freebsd_install_retries }}"
+      until: result is succeeded
+      delay: "{{ freebsd_install_delay }}"
   when:
     - ansible_os_family == 'FreeBSD'
-    - freebsd_install_method|lower == "ports"
+    - freebsd_install_method|lower == 'ports'
 
 # Linux
-- name: "packages: Install packages Linux"
-  ansible.builtin.package:
-    name: "{{ item }}"
-  loop: "{{ integrity_packages }}"
-  register: result
-  retries: "{{ linux_install_retries }}"
-  until: result is succeeded
-  delay: "{{ linux_install_delay }}"
-  when: ansible_os_family in ['Debian', 'RedHat']
+- name: "packages: Install Linux packages"
+  block:
+    - name: "packages: Install Linux packages"
+      ansible.builtin.package:
+        name: "{{ item }}"
+      loop: "{{ integrity_packages }}"
+      register: result
+      retries: "{{ linux_install_retries }}"
+      until: result is succeeded
+      delay: "{{ linux_install_delay }}"
+  rescue:
+    - name: "packages: Rescue Linux packages"
+      ansible.builtin.fail:
+        msg: |
+          [ERROR] task {{ ansible_failed_task.name }} failed.
+          ansible_failed_task:
+            {{ ansible_failed_task|to_yaml(indent=2)|indent(2) }}
+          ansible_failed_result:
+            {{ ansible_failed_result|to_yaml(indent=2)|indent(2) }}
+  when: ansible_os_family in integrity_supported_linux_family
 
 # EOF
 ...

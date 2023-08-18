@@ -6,6 +6,7 @@ integrity_backup_conf: true
 integrity_cron: true
 integrity_source_ignore_current_lock: false
 
+integrity_supported_linux_family: ['RedHat', 'Debian']
 integrity_install: true
 integrity_install_base:
   - integrity
@@ -14,11 +15,12 @@ integrity_install_contrib:
   - integrity-check-hash
 
 # FreeBSD
+freebsd_install_retries: 10
+freebsd_install_delay: 5
 freebsd_install_method: packages
 # freebsd_install_method: ports
 freebsd_use_packages: true
-freebsd_install_retries: 10
-freebsd_install_delay: 5
+
 # Linux
 linux_install_retries: 10
 linux_install_delay: 5

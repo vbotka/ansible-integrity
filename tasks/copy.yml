@@ -7,7 +7,7 @@
 
 - name: "copy: Debug integrity-current.lock file is present"
   ansible.builtin.debug:
-    msg: "[LOCK] integrity-current.lock file is present. Scripts will no be copied."
+    msg: '[LOCK] integrity-current.lock file is present. Scripts will no be copied.'
   when:
     - integrity_current_lock.stat.exists
     - not integrity_source_ignore_current_lock|bool
