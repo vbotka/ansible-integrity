@@ -1,12 +1,12 @@
 ---
 
-- name: "cron: Configure cron MAILTO={{ integrity_cron_mailto }}"
+- name: "Cron: Configure cron MAILTO={{ integrity_cron_mailto }}"
   community.general.cronvar:
     name: MAILTO
     value: "{{ integrity_cron_mailto }}"
     user: "{{ integrity_cron_user }}"
 
-- name: "cron: Configure cron files integrity check"
+- name: "Cron: Configure cron files integrity check"
   ansible.builtin.cron:
     name: check integrity of file
     minute: "{{ integrity_cron_minute }}"

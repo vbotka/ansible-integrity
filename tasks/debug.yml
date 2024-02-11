@@ -1,54 +1,54 @@
 ---
 
-- name: "debug: Integrity"
+- name: "Debug: Integrity"
   vars:
     msg: |-
-         ansible_architecture: {{ ansible_architecture }}
-         ansible_os_family: {{ ansible_os_family }}
-         ansible_distribution: {{ ansible_distribution }}
-         ansible_distribution_major_version: {{ ansible_distribution_major_version }}
-         ansible_distribution_version: {{ ansible_distribution_version }}
-         ansible_distribution_release: {{ ansible_distribution_release }}
-         ansible_python_version: {{ ansible_python_version }}
+      ansible_architecture: {{ ansible_architecture }}
+      ansible_os_family: {{ ansible_os_family }}
+      ansible_distribution: {{ ansible_distribution }}
+      ansible_distribution_major_version: {{ ansible_distribution_major_version }}
+      ansible_distribution_version: {{ ansible_distribution_version }}
+      ansible_distribution_release: {{ ansible_distribution_release }}
+      ansible_python_version: {{ ansible_python_version }}
 
-         freebsd_install_method: {{ freebsd_install_method }}
-         freebsd_use_packages: {{ freebsd_use_packages }}
-         freebsd_install_retries: {{ freebsd_install_retries }}
-         freebsd_install_delay: {{ freebsd_install_delay }}
-         linux_install_retries: {{ linux_install_retries }}
-         linux_install_delay: {{ linux_install_delay }}
+      freebsd_install_method: {{ freebsd_install_method }}
+      freebsd_use_packages: {{ freebsd_use_packages }}
+      freebsd_install_retries: {{ freebsd_install_retries }}
+      freebsd_install_delay: {{ freebsd_install_delay }}
+      linux_install_retries: {{ linux_install_retries }}
+      linux_install_delay: {{ linux_install_delay }}
 
-         integrity_supported_linux_family: {{ integrity_supported_linux_family }}
-         integrity_backup_conf: {{ integrity_backup_conf }}
-         integrity_install: {{ integrity_install }}
-         integrity_packages:
-           {{ integrity_packages|to_nice_yaml(indent=2)|indent(2) }}
-         integrity_source_ignore_current_lock: {{ integrity_source_ignore_current_lock }}
-         integrity_source_version: {{ integrity_source_version }}
-         integrity_source_file: {{ integrity_source_file }}
-         integrity_source_dir: {{ integrity_source_dir }}
-         integrity_source_dest: {{ integrity_source_dest }}
-         integrity_source_dest_mode: {{ integrity_source_dest_mode }}
-         integrity_source_url: {{ integrity_source_url }}
-         integrity_owner: {{ integrity_owner }}
-         integrity_linkdir: {{ integrity_linkdir }}
-         integrity_metadir: {{ integrity_metadir }}
-         integrity_dir_mode: {{ integrity_dir_mode }}
-         integrity_bin_dir: {{ integrity_bin_dir }}
-         integrity_bin_dir_mode: {{ integrity_bin_dir_mode }}
-         integrity_bin_mode: {{ integrity_bin_mode }}
-         integrity_config_file: {{ integrity_config_file }}
-         integrity_config_items:
-           {{ integrity_config_items|to_yaml(indent=2)|indent(2) }}
-         integrity_cron: {{ integrity_cron }}
-         integrity_cron_command: {{ integrity_cron_command }}
+      integrity_supported_linux_family: {{ integrity_supported_linux_family }}
+      integrity_backup_conf: {{ integrity_backup_conf }}
+      integrity_install: {{ integrity_install }}
+      integrity_packages:
+        {{ integrity_packages | to_nice_yaml(indent=2) | indent(2) }}
+      integrity_source_ignore_current_lock: {{ integrity_source_ignore_current_lock }}
+      integrity_source_version: {{ integrity_source_version }}
+      integrity_source_file: {{ integrity_source_file }}
+      integrity_source_dir: {{ integrity_source_dir }}
+      integrity_source_dest: {{ integrity_source_dest }}
+      integrity_source_dest_mode: {{ integrity_source_dest_mode }}
+      integrity_source_url: {{ integrity_source_url }}
+      integrity_owner: {{ integrity_owner }}
+      integrity_linkdir: {{ integrity_linkdir }}
+      integrity_metadir: {{ integrity_metadir }}
+      integrity_dir_mode: {{ integrity_dir_mode }}
+      integrity_bin_dir: {{ integrity_bin_dir }}
+      integrity_bin_dir_mode: {{ integrity_bin_dir_mode }}
+      integrity_bin_mode: {{ integrity_bin_mode }}
+      integrity_config_file: {{ integrity_config_file }}
+      integrity_config_items:
+        {{ integrity_config_items | to_yaml(indent=2) | indent(2) }}
+      integrity_cron: {{ integrity_cron }}
+      integrity_cron_command: {{ integrity_cron_command }}
 
-         integrity_install_base:
-           {{ integrity_install_base|to_nice_yaml(indent=2)|indent(2) }}
-         integrity_install_contrib:
-           {{ integrity_install_contrib|to_nice_yaml(indent=2)|indent(2) }}
-         integrity_clients:
-           {{ integrity_clients|to_yaml(indent=2)|indent(2) }}
+      integrity_install_base:
+        {{ integrity_install_base | to_nice_yaml(indent=2) | indent(2) }}
+      integrity_install_contrib:
+        {{ integrity_install_contrib | to_nice_yaml(indent=2) | indent(2) }}
+      integrity_clients:
+        {{ integrity_clients | to_yaml(indent=2) | indent(2) }}
   ansible.builtin.debug:
     msg: "{{ '{}'.format(msg) }}"
 

@@ -38,42 +38,58 @@ See defaults and examples in vars.
 
 ## Best practice
 
-Install the roles and collections
+Install roles
 
-```
+```bash
 ansible-galaxy role install vbotka.integrity
 ansible-galaxy role install vbotka.ansible_lib
+```
+
+Install the collection if necessary
+
+```bash
 ansible-galaxy collection install community.general
 ```
 
 Create the playbook and inventory. Check the syntax
 
-```
+```bash
 shell> ansible-playbook integrity.yml --syntax-check
 ```
 
 Install packages
 
-```
+```bash
 shell> ansible-playbook integrity.yml -t integrity_packages
 ```
 
 Download source
 
-```
+```bash
 shell> ansible-playbook integrity.yml -t integrity_source
 ```
 
 Dry-run playbook
 
-```
+```bash
 shell> ansible-playbook integrity.yml --check
 ```
 
 Run the playbook twice
 
-```
+```bash
 shell> ansible-playbook integrity.yml
+```
+
+
+## Ansible lint
+
+Use the configuration file *.ansible-lint.local* when running
+*ansible-lint*. Some rules might be disabled and some warnings might
+be ignored. See the notes in the configuration file.
+
+```bash
+shell> ansible-lint -c .ansible-lint.local
 ```
 
 

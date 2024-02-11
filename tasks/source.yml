@@ -1,56 +1,57 @@
 ---
 
-- name: "source: DEBUG Print variables"
+- name: "Source: DEBUG Print variables"
   vars:
     msg: |-
-         url: {{ integrity_source_url }}/{{ integrity_source_file }}
-         dest: {{ integrity_source_dest }}/integrity-{{ integrity_source_file }}
+      url: {{ integrity_source_url }}/{{ integrity_source_file }}
+      dest: {{ integrity_source_dest }}/integrity-{{ integrity_source_file }}
   ansible.builtin.debug:
     msg: "{{ '{}'.format(msg) }}"
   when: integrity_debug|bool
 
-- name: "source: Test presence of {{ integrity_source_dest }}/integrity-current.lock"
+- name: "Source: Test presence of {{ integrity_source_dest ~ '/integrity-current.lock' }}"
   ansible.builtin.stat:
     path: "{{ integrity_source_dest }}/integrity-current.lock"
   register: integrity_current_lock
 
-- name: "source: Debug integrity-current.lock file is present."
+- name: "Source: Debug integrity-current.lock file is present."
   ansible.builtin.debug:
-    msg: '[LOCK] integrity-current.lock file is present.'
+    msg: "[LOCK] integrity-current.lock file is present."
   when:
     - integrity_current_lock.stat.exists
-    - not integrity_source_ignore_current_lock|bool
-    - integrity_debug|bool
+    - not integrity_source_ignore_current_lock | bool
+    - integrity_debug | bool
 
-- name: "source: Create directory for the source code {{ integrity_source_dest }}"
+- name: "Source: Create directory for the source code {{ integrity_source_dest }}"
   ansible.builtin.file:
     state: directory
     path: "{{ integrity_source_dest }}"
     mode: "{{ integrity_source_dest_mode }}"
   tags: integrity_source_extract
 
-- name: "source: Download {{ integrity_source_url }}/{{ integrity_source_file }}"
+- name: "Source: Download {{ integrity_source_url ~ '/' ~ integrity_source_file }}"
   ansible.builtin.get_url:
     url: "{{ integrity_source_url }}/{{ integrity_source_file }}"
     dest: "{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
+    mode: "0644"
     checksum: "{{ integrity_source_checksum }}"
   tags: integrity_source_extract
 
-- name: "source: Check existence of {{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
+- name: "Source: Check existence of {{ integrity_source_dest ~ '/integrity-' ~ integrity_source_file }}"
   ansible.builtin.stat:
     path: "{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
   register: integrity_source_file_downloaded
   tags: integrity_source_extract
 
-- name: "source: Debug integrity_source_file_downloaded."
+- name: "Source: Debug integrity_source_file_downloaded."
   ansible.builtin.debug:
     msg: |-
       integrity_source_file_downloaded:
-        {{ integrity_source_file_downloaded|to_yaml(indent=2)|indent(2) }}
+        {{ integrity_source_file_downloaded | to_yaml(indent=2) | indent(2) }}
   when: integrity_debug|bool
   tags: integrity_source_extract
 
-- name: "source: Extract sources to {{ integrity_source_dest }}"
+- name: "Source: Extract sources to {{ integrity_source_dest }}"
   ansible.builtin.unarchive:
     src: "{{ integrity_source_dest }}/integrity-{{ integrity_source_file }}"
     dest: "{{ integrity_source_dest }}"
@@ -58,55 +59,55 @@
   when: integrity_source_file_downloaded.stat.exists
   tags: integrity_source_extract
 
-- name: "source: Create symbolic link integrity to {{ integrity_source_dir }}"
+- name: "Source: Create symbolic link integrity to {{ integrity_source_dir }}"
   ansible.builtin.file:
     state: link
     src: "{{ integrity_source_dest }}/{{ integrity_source_dir }}"
     dest: "{{ integrity_source_dest }}/integrity"
     force: true
   when: (not integrity_current_lock.stat.exists) or
-         integrity_source_ignore_current_lock|bool
+        integrity_source_ignore_current_lock | bool
   tags: integrity_source_link
 
-- name: "source: Create working directory for the scripts {{ integrity_source_dest }}/integrity-work"
+- name: "Source: Create working directory for the scripts {{ integrity_source_dest ~ '/integrity-work' }}"
   ansible.builtin.file:
     state: directory
-    path: "{{ integrity_source_dest }}/integrity-work"
+    path: "{{ integrity_source_dest ~ '/integrity-work' }}"
     mode: "{{ integrity_source_dest_mode }}"
 
-- name: "source: Copy script to working directory"
-  ansible.builtin.copy:
-    src: "{{ integrity_source_dest }}/integrity/{{ item }}"
-    dest: "{{ integrity_source_dest }}/integrity-work"
-    mode: "{{ integrity_bin_mode }}"
-    remote_src: true
-  loop:
-    - integrity
+- name: Copy nad patch script
   when: not ansible_check_mode
-  changed_when: false
+  block:
 
-- name: "source: Which bash"
-  ansible.builtin.command:
-    cmd: which bash
-  register: integrity_which_bash
-  changed_when: false
+    - name: "Source: Copy script to working directory"
+      ansible.builtin.copy:
+        src: "{{ integrity_source_dest }}/integrity/{{ item }}"
+        dest: "{{ integrity_source_dest }}/integrity-work"
+        mode: "{{ integrity_bin_mode }}"
+        remote_src: true
+      loop:
+        - integrity
+      changed_when: false
 
-- name: "source: Debug bash path"
-  ansible.builtin.debug:
-    msg: "Bash path: {{ integrity_which_bash.stdout }}"
-  when:
-    - integrity_debug|bool
-    - not ansible_check_mode
+    - name: "Source: Which bash"
+      ansible.builtin.command:
+        cmd: which bash
+      register: integrity_which_bash
+      changed_when: false
 
-- name: "source: Patch {{ integrity_which_bash.stdout }} in {{ integrity_source_dest }}/integrity-work/integrity"
-  ansible.builtin.lineinfile:
-    dest: "{{ integrity_source_dest }}/integrity-work/{{ item }}"
-    regexp: "#!"
-    line: "#!{{ integrity_which_bash.stdout }}"
-  loop:
-    - integrity
-  when: not ansible_check_mode
-  changed_when: false
+    - name: "Source: Debug bash path"
+      ansible.builtin.debug:
+        msg: "Bash path: {{ integrity_which_bash.stdout }}"
+      when: integrity_debug | bool
+
+    - name: "Source: Patch {{ integrity_source_dest ~ '/integrity-work/integrity' }}"
+      ansible.builtin.lineinfile:
+        dest: "{{ integrity_source_dest }}/integrity-work/{{ item }}"
+        regexp: "#!"
+        line: "#!{{ integrity_which_bash.stdout }}"
+      loop:
+        - integrity
+      changed_when: false
 
 # EOF
 ...

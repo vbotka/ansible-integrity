@@ -1,31 +1,37 @@
 ---
 
-# FreeBSD
-- name: "packages: Install FreeBSD packages"
+- name: FreeBSD packages
+  when:
+    - ansible_os_family == 'FreeBSD'
+    - freebsd_install_method|lower == 'packages'
   block:
-    - name: "packages: Install FreeBSD packages"
+
+    - name: "Packages: Install FreeBSD packages"
       community.general.pkgng:
         name: "{{ integrity_packages }}"
       register: result
       retries: "{{ freebsd_install_retries }}"
       until: result is succeeded
       delay: "{{ freebsd_install_delay }}"
+
   rescue:
-    - name: "packages: Rescue FreeBSD packages"
+
+    - name: "Packages: Rescue FreeBSD packages"
       ansible.builtin.fail:
         msg: |
-          [ERROR] task {{ ansible_failed_task.name }} failed.
+          [ERR] task {{ ansible_failed_task.name }} failed.
           ansible_failed_task:
-            {{ ansible_failed_task|to_yaml(indent=2)|indent(2) }}
+            {{ ansible_failed_task | to_yaml(indent=2) | indent(2) }}
           ansible_failed_result:
-            {{ ansible_failed_result|to_yaml(indent=2)|indent(2) }}
+            {{ ansible_failed_result | to_yaml(indent=2) | indent(2) }}
+
+- name: FreeBSD ports
   when:
     - ansible_os_family == 'FreeBSD'
-    - freebsd_install_method|lower == 'packages'
-
-- name: "packages: Install FreeBSD ports"
+    - freebsd_install_method|lower == 'ports'
   block:
-    - name: "packages: Install FreeBSD ports"
+
+    - name: "Packages: Install FreeBSD ports"
       community.general.portinstall:
         name: "{{ item }}"
         use_packages: "{{ freebsd_use_packages }}"
@@ -34,14 +40,23 @@
       retries: "{{ freebsd_install_retries }}"
       until: result is succeeded
       delay: "{{ freebsd_install_delay }}"
-  when:
-    - ansible_os_family == 'FreeBSD'
-    - freebsd_install_method|lower == 'ports'
 
-# Linux
-- name: "packages: Install Linux packages"
+  rescue:
+
+    - name: "Packages: Rescue FreeBSD ports"
+      ansible.builtin.fail:
+        msg: |
+          [ERR] task {{ ansible_failed_task.name }} failed.
+          ansible_failed_task:
+            {{ ansible_failed_task | to_yaml(indent=2) | indent(2) }}
+          ansible_failed_result:
+            {{ ansible_failed_result | to_yaml(indent=2) | indent(2) }}
+
+- name: Linux packages
+  when: ansible_os_family in integrity_supported_linux_family
   block:
-    - name: "packages: Install Linux packages"
+
+    - name: "Packages: Install Linux packages"
       ansible.builtin.package:
         name: "{{ item }}"
       loop: "{{ integrity_packages }}"
@@ -49,16 +64,17 @@
       retries: "{{ linux_install_retries }}"
       until: result is succeeded
       delay: "{{ linux_install_delay }}"
+
   rescue:
-    - name: "packages: Rescue Linux packages"
+
+    - name: "Packages: Rescue Linux packages"
       ansible.builtin.fail:
         msg: |
-          [ERROR] task {{ ansible_failed_task.name }} failed.
+          [ERR] task {{ ansible_failed_task.name }} failed.
           ansible_failed_task:
-            {{ ansible_failed_task|to_yaml(indent=2)|indent(2) }}
+            {{ ansible_failed_task | to_yaml(indent=2) | indent(2) }}
           ansible_failed_result:
-            {{ ansible_failed_result|to_yaml(indent=2)|indent(2) }}
-  when: ansible_os_family in integrity_supported_linux_family
+            {{ ansible_failed_result | to_yaml(indent=2) | indent(2) }}
 
 # EOF
 ...
