@@ -14,4 +14,3 @@ integrity_config_hashdeepconf: -o f -l -x
 integrity_config_mtree: /usr/sbin/mtree
 
 # EOF
-...

@@ -6,7 +6,7 @@ integrity_backup_conf: true
 integrity_cron: true
 integrity_source_ignore_current_lock: false
 
-integrity_supported_linux_family: ['RedHat', 'Debian']
+integrity_supported_linux_family: [RedHat, Debian]
 integrity_install: true
 integrity_install_base:
   - integrity
@@ -26,13 +26,13 @@ linux_install_retries: 10
 linux_install_delay: 5
 
 # source
-integrity_source_version: "1.1.2"
-integrity_source_checksum: "sha1:4d00cab989c1023aea9be8f84a9dc6d7da7d7944"
+integrity_source_version: 1.1.2
+integrity_source_checksum: sha1:4d00cab989c1023aea9be8f84a9dc6d7da7d7944
 integrity_source_file: "{{ integrity_source_version }}.tar.gz"
-integrity_source_dir: "integrity-{{ integrity_source_version }}"
+integrity_source_dir: integrity-{{ integrity_source_version }}
 integrity_source_dest: /usr/local/src
 integrity_source_dest_mode: "0755"
-integrity_source_url: "https://github.com/vbotka/integrity/archive"
+integrity_source_url: https://github.com/vbotka/integrity/archive
 
 # directories
 integrity_owner: root
@@ -72,16 +72,14 @@ integrity_config_items:
 # cron
 integrity_cron_user: root
 integrity_cron_mailto: root
-integrity_cron_hour: '*/4'
-integrity_cron_minute: '20'
+integrity_cron_hour: "*/4"
+integrity_cron_minute: "20"
 integrity_cron_command: /root/bin/integrity -s -a
 
 # clients
 integrity_clients: []
-
 # client specific exclude
 integrity_exclude: []
-
 # client specific mtree keywords
 integrity_mtreekeys: []
 

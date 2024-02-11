@@ -6,12 +6,12 @@
 
 - name: Import debug.yml
   ansible.builtin.import_tasks: debug.yml
-  when: integrity_debug|bool
+  when: integrity_debug | bool
   tags: [integrity_debug, always]
 
 - name: Import packages.yml
   ansible.builtin.import_tasks: packages.yml
-  when: integrity_install|bool
+  when: integrity_install | bool
   tags: integrity_packages
 
 - name: Import source.yml
@@ -28,7 +28,7 @@
 
 - name: Import cron.yml
   ansible.builtin.import_tasks: cron.yml
-  when: integrity_cron|bool
+  when: integrity_cron | bool
   tags: integrity_cron
 
 # EOF

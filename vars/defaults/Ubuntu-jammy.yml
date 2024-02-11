@@ -1,5 +1,5 @@
 ---
-# Debian vars for vbotka.integrity
+# Ubuntu Jammy vars for vbotka.integrity
 
 integrity_packages:
   - bash
@@ -14,4 +14,3 @@ integrity_config_hashdeepconf: -o f -l -x -k
 integrity_config_mtree: /usr/bin/mtree
 
 # EOF
-...
