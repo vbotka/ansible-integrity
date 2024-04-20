@@ -14,6 +14,7 @@ Feature update.
 
 Major Changes
 -------------
+* Support 13.3 and 14.0
 
 Minor Changes
 -------------
