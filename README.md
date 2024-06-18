@@ -1,6 +1,8 @@
 # integrity
 
-[![quality](https://img.shields.io/ansible/quality/27910)](https://galaxy.ansible.com/vbotka/integrity)[![Build Status](https://app.travis-ci.com/vbotka/ansible-integrity.svg?branch=master)](https://app.travis-ci.com/vbotka/ansible-integrity)[![GitHub tag](https://img.shields.io/github/v/tag/vbotka/ansible-integrity)](https://github.com/vbotka/ansible-integrity/tags)
+[![quality](https://img.shields.io/ansible/quality/27910)](https://galaxy.ansible.com/vbotka/integrity)
+[![Build Status](https://app.travis-ci.com/vbotka/ansible-integrity.svg?branch=master)](https://app.travis-ci.com/vbotka/ansible-integrity)
+[![GitHub tag](https://img.shields.io/github/v/tag/vbotka/ansible-integrity)](https://github.com/vbotka/ansible-integrity/tags)
 
 [Ansible role](https://galaxy.ansible.com/vbotka/integrity/).
 - Install [integrity](https://github.com/vbotka/integrity)
@@ -94,7 +96,7 @@ shell> ansible-lint -c .ansible-lint.local
 
 
 ## References
------------
+
 - [Path names must by preceded by a period](http://unix.stackexchange.com/questions/316210/mtree8-use-of-o/316614)
 
 
