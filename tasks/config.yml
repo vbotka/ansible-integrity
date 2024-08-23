@@ -1,6 +1,6 @@
 ---
 
-- name: "Configure: Create configuration {{ integrity_config_file }}"
+- name: "Config: Create configuration {{ integrity_config_file }}"
   ansible.builtin.template:
     src: integrity.config.j2
     dest: "{{ integrity_config_file }}"
@@ -10,7 +10,7 @@
     backup: "{{ integrity_backup_conf }}"
   loop: "{{ integrity_config_items }}"
 
-- name: "Configure: Create directory for clients {{ integrity_linkdir }}"
+- name: "Config: Create directory for clients {{ integrity_linkdir }}"
   ansible.builtin.file:
     state: directory
     path: "{{ integrity_linkdir }}"
@@ -18,7 +18,7 @@
     group: "{{ integrity_group }}"
     mode: "{{ integrity_dir_mode }}"
 
-- name: "Configure: Create directory for data {{ integrity_metadir }}"
+- name: "Config: Create directory for data {{ integrity_metadir }}"
   ansible.builtin.file:
     state: directory
     path: "{{ integrity_metadir }}"
@@ -26,7 +26,7 @@
     group: "{{ integrity_group }}"
     mode: "{{ integrity_dir_mode }}"
 
-- name: "Configure: Create exclude files"
+- name: "Config: Create exclude files"
   ansible.builtin.template:
     src: client.exclude.j2
     dest: "{{ integrity_metadir }}/{{ item.link }}.{{ integrity_config_extexclude }}"
@@ -38,7 +38,7 @@
   loop_control:
     label: "{{ item.link }}"
 
-- name: "Configure: Create mtreekeys files"
+- name: "Config: Create mtreekeys files"
   ansible.builtin.template:
     src: client.mtreekeys.j2
     dest: "{{ integrity_metadir }}/{{ item.link }}.{{ integrity_config_extmtreekeys }}"
@@ -48,7 +48,7 @@
     backup: "{{ integrity_backup_conf }}"
   loop: "{{ integrity_mtreekeys }}"
 
-- name: "Configure: Create symbolic links to clients"
+- name: "Config: Create symbolic links to clients"
   ansible.builtin.file:
     state: link
     src: "{{ item.dir }}"

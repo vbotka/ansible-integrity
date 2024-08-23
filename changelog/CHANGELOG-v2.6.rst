@@ -24,6 +24,8 @@ Minor Changes
 * Update skip_list in local ansible-lint config.
 * Add variable integrity_role_version
 * Update debug.yml
+* Renamed tasks/packages.yml -> tasks/pkg.yml
+* Renamed tasks/configure.yml -> tasks/config.yml
 
 
 2.6.0
