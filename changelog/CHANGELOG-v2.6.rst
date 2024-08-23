@@ -22,6 +22,8 @@ Minor Changes
 * Update README
 * Use default rules in local ansible-lint config.
 * Update skip_list in local ansible-lint config.
+* Add variable integrity_role_version
+* Update debug.yml
 
 
 2.6.0
