@@ -4,6 +4,7 @@ vbotka.integrity 2.6 Release Notes
 
 .. contents:: Topics
 # BEGIN Commits 2.6.2
+- Update python 3.11 in .travis.yml
 - Update README.
 - Format meta/main.yml
 - Start devel 2.6.2
@@ -17,6 +18,11 @@ Major Changes
 -------------
 Minor Changes
 -------------
+- Update python 3.11 in .travis.yml
+- Update README.
+- Format meta/main.yml
+- Start devel 2.6.2
+
 Bugfixes
 --------
 Breaking Changes / Porting Guide
