@@ -62,7 +62,7 @@ shell> ansible-playbook integrity.yml --syntax-check
 Install packages
 
 ```bash
-shell> ansible-playbook integrity.yml -t integrity_packages
+shell> ansible-playbook integrity.yml -t integrity_pkg
 ```
 
 Download source
