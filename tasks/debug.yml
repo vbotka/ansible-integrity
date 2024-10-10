@@ -1,6 +1,6 @@
 ---
 
-- name: "Debug: Integrity"
+- name: "Debug: Integrity integrity_debug={{ integrity_debug }}"
   vars:
     msg: |-
       integrity_role_version: {{ integrity_role_version }}
