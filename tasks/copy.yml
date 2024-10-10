@@ -1,29 +1,31 @@
 ---
 
 - name: "Copy: Test presence of {{ integrity_source_dest ~ '/integrity-current.lock' }}"
+  register: integrity_current_lock
   ansible.builtin.stat:
     path: "{{ integrity_source_dest }}/integrity-current.lock"
-  register: integrity_current_lock
 
-- name: "Copy: Debug integrity-current.lock file is present"
-  ansible.builtin.debug:
-    msg: "[LOCK] integrity-current.lock file is present. Scripts will no be copied."
+- name: "Copy: Debug integrity-current.lock file is present integrity_debug={{ integrity_debug }}"
   when:
     - integrity_current_lock.stat.exists
     - not integrity_source_ignore_current_lock | bool
     - integrity_debug | bool
+  ansible.builtin.debug:
+    msg: "[LOCK] integrity-current.lock file is present. Scripts will no be copied."
 
 - name: "Copy: Create directory for installation {{ integrity_bin_dir }}"
+  when: (not integrity_current_lock.stat.exists) or
+        integrity_source_ignore_current_lock | bool
   ansible.builtin.file:
     state: directory
     path: "{{ integrity_bin_dir }}"
     owner: "{{ integrity_owner }}"
     group: "{{ integrity_group }}"
     mode: "{{ integrity_bin_dir_mode }}"
-  when: (not integrity_current_lock.stat.exists) or
-        integrity_source_ignore_current_lock | bool
 
 - name: "Copy: Copy base scripts to {{ integrity_bin_dir }}"
+  when: (not integrity_current_lock.stat.exists) or
+        integrity_source_ignore_current_lock | bool
   ansible.builtin.copy:
     src: "{{ integrity_source_dest }}/integrity-work/{{ item }}"
     dest: "{{ integrity_bin_dir }}/{{ item }}"
@@ -32,12 +34,10 @@
     mode: "{{ integrity_bin_mode }}"
     remote_src: true
   loop: "{{ integrity_install_base }}"
-  when:
-    - (not integrity_current_lock.stat.exists) or
-      integrity_source_ignore_current_lock | bool
-    - not ansible_check_mode
 
 - name: "Copy: Copy contrib scripts to {{ integrity_bin_dir }}"
+  when: (not integrity_current_lock.stat.exists) or
+        integrity_source_ignore_current_lock | bool
   ansible.builtin.copy:
     src: "{{ integrity_source_dest }}/integrity/contrib/{{ ansible_system | lower }}/{{ item }}"
     dest: "{{ integrity_bin_dir }}/{{ item }}"
@@ -46,10 +46,6 @@
     mode: "{{ integrity_bin_mode }}"
     remote_src: true
   loop: "{{ integrity_install_contrib }}"
-  when:
-    - (not integrity_current_lock.stat.exists) or
-      integrity_source_ignore_current_lock | bool
-    - not ansible_check_mode
 
 # EOF
 ...

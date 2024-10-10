@@ -17,6 +17,10 @@ Major Changes
 
 Minor Changes
 -------------
+* Fix ansible.builtin.get_url, environment:
+  CRYPTOGRAPHY_OPENSSL_NO_LEGACY: '1'
+* Tasks formatting improved.
+
 
 
 2.6.2

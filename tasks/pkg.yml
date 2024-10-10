@@ -7,9 +7,9 @@
   block:
 
     - name: "Pkg: Install FreeBSD packages"
+      register: result
       community.general.pkgng:
         name: "{{ integrity_packages }}"
-      register: result
       retries: "{{ freebsd_install_retries }}"
       until: result is succeeded
       delay: "{{ freebsd_install_delay }}"
@@ -32,11 +32,11 @@
   block:
 
     - name: "Pkg: Install FreeBSD ports"
+      register: result
       community.general.portinstall:
         name: "{{ item }}"
         use_packages: "{{ freebsd_use_packages }}"
       loop: "{{ integrity_packages }}"
-      register: result
       retries: "{{ freebsd_install_retries }}"
       until: result is succeeded
       delay: "{{ freebsd_install_delay }}"
@@ -57,10 +57,10 @@
   block:
 
     - name: "Pkg: Install Linux packages"
+      register: result
       ansible.builtin.package:
         name: "{{ item }}"
       loop: "{{ integrity_packages }}"
-      register: result
       retries: "{{ linux_install_retries }}"
       until: result is succeeded
       delay: "{{ linux_install_delay }}"

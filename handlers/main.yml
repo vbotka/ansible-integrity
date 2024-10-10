@@ -2,6 +2,7 @@
 # handlers for vbotka.integrity
 
 - name: Create missing meta data
+  listen: create missing meta data
   ansible.builtin.command:  # noqa: no-changed-when
     cmd: /root/bin/integrity -s -i -a
 

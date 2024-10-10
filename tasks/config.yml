@@ -49,13 +49,13 @@
   loop: "{{ integrity_mtreekeys }}"
 
 - name: "Config: Create symbolic links to clients"
+  notify: create missing meta data
   ansible.builtin.file:
     state: link
     src: "{{ item.dir }}"
     dest: "{{ integrity_linkdir }}/{{ item.link }}"
     force: true
   loop: "{{ integrity_clients }}"
-  notify: Create missing meta data
 
 # EOF
 ...
