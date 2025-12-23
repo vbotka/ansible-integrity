@@ -2,8 +2,8 @@
 
 - name: FreeBSD packages
   when:
-    - ansible_os_family == 'FreeBSD'
-    - freebsd_install_method|lower == 'packages'
+    - ansible_facts['os_family'] == 'FreeBSD'
+    - freebsd_install_method | lower == 'packages'
   block:
 
     - name: "Pkg: Install FreeBSD packages"
@@ -27,8 +27,8 @@
 
 - name: FreeBSD ports
   when:
-    - ansible_os_family == 'FreeBSD'
-    - freebsd_install_method|lower == 'ports'
+    - ansible_facts['os_family'] == 'FreeBSD'
+    - freebsd_install_method | lower == 'ports'
   block:
 
     - name: "Pkg: Install FreeBSD ports"
@@ -53,7 +53,7 @@
             {{ ansible_failed_result | to_yaml(indent=2) | indent(2) }}
 
 - name: Linux packages
-  when: ansible_os_family in integrity_supported_linux_family
+  when: ansible_facts['os_family'] in integrity_supported_linux_family
   block:
 
     - name: "Pkg: Install Linux packages"
